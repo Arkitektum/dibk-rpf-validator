@@ -32,4 +32,4 @@ jobs:
         app-name: 'dibk-rpf-validator'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_6c5085d61ef5418985821a914ab4f2a2 }}
-        package: .
+        package: ./build
