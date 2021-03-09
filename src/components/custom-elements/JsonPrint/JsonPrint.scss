@@ -1,0 +1,25 @@
+.jsonPrint {
+   height: 350px;
+   overflow-y: scroll;
+   border: 1px solid rgb(206, 212, 218);
+
+   pre {
+      background-color: #ffffff;
+      padding: 10px 20px;
+      white-space: pre-wrap;
+      margin: 0;
+      font-size: 12px;
+   }
+   
+   .json-key {
+      color: brown;
+   }
+   
+   .json-value {
+      color: navy;
+   }
+   
+   .json-string {
+      color: olive;
+   }
+}
