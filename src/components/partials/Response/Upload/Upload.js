@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import FileInput from 'components/custom-elements/FileInput/FileInput';
+import Dialog from 'components/custom-elements/Dialog/Dialog';
 import axios from 'axios';
 import './Upload.scss';
 
@@ -14,7 +15,9 @@ class Upload extends Component {
          oversendelse: undefined,
          planbestemmelser: undefined,
          plankart2D: undefined,
-         plankart3D: undefined
+         plankart3D: undefined,
+         dialogShow: false,
+         dialogMessage: ''
       };
 
       this.validate = this.validate.bind(this);
@@ -50,6 +53,7 @@ class Upload extends Component {
       }
 
       this.setState({ validating: true });
+      this.props.onUpload();
       const formData = new FormData();
 
       if (this.state.oversendelse) {
@@ -83,7 +87,10 @@ class Upload extends Component {
 
          data = response.data;
       } catch (error) {
-         alert(`En feil har oppstått: ${error}`);
+         this.setState({ 
+            dialogShow: true, 
+            dialogMessage: `En feil har oppstått: ${error}` 
+         });
       } finally {
          this.reset();
          this.props.onValidated(data);
@@ -123,7 +130,7 @@ class Upload extends Component {
                </div>
             </div>
 
-            <div className="row mt-2">
+            <div className="row mt-2 mb-3">
                <div className="col">
                   <Button onClick={this.validate} disabled={!this.hasFiles() || this.state.validating}>Validér</Button>
 
@@ -136,6 +143,8 @@ class Upload extends Component {
                   }
                </div>
             </div>
+
+            <Dialog title="Validering feilet" message={this.state.dialogMessage} show={this.state.dialogShow} onHide={() => this.setState({ dialogShow: false })} />            
          </React.Fragment>
       );
    }

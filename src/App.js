@@ -13,7 +13,12 @@ class App extends Component {
          apiResponse: null
       };
 
+      this.handleUpload = this.handleUpload.bind(this);
       this.handleValidated = this.handleValidated.bind(this);
+   }
+
+   handleUpload() {
+      this.setState({ apiResponse: null });
    }
 
    handleValidated(data) {
@@ -32,7 +37,7 @@ class App extends Component {
 
                <div className="paper">
                   <h4>Last opp filer</h4>
-                  <Upload onValidated={this.handleValidated} />
+                  <Upload onUpload={this.handleUpload} onValidated={this.handleValidated} />
                </div>
 
                {this.renderResponse()}
@@ -55,7 +60,7 @@ class App extends Component {
 
             <div className="paper">
                <h4>Svar fra API</h4>
-               <JsonPrint obj={this.state.apiResponse} />
+               <JsonPrint data={this.state.apiResponse} />
             </div>
          </div>
       );

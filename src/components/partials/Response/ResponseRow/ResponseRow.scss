@@ -1,54 +1,43 @@
 .response-row {
    font-size: 14px;
 
+   &:first-child .info {
+      border-top: 0 none;
+   }
+
    .info {
       user-select: none;
-      cursor: pointer;
       border-top: 1px solid #dddddd;
       padding: 8px 6px;
       font-size: 0;
-
-      &:hover {
-         background-color: #f0f4f7;
-      }
 
       > * {
          display: inline-block;
          font-size: 14px;
       }
 
-      .type {
+      .status {
          width: 11%;
       }
 
       .name {
          width: 79%;
+         
+         .documentation {
+            margin-left: 10px;
+         }
       }
 
       .id {
          width: 10%;
       }
    }
+   
+   &.response-row-with-messages .info {
+      cursor: pointer;
 
-   .label {
-      color: #fff;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-weight: 500;
-      font-size: 12px;
-
-      &.label-default {
-         background-color: #00676f;
-      }
-
-      &.label-error {
-         background-color: #d9534f;
-         text-transform: uppercase;
-      }
-
-      &.label-warning {
-         background-color: #f0ad4e;
-         text-transform: uppercase;
+      &:hover {
+         background-color: #f0f4f7;
       }
    }
 

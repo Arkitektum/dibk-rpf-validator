@@ -2,31 +2,45 @@ import { useState } from 'react';
 import { createRandomId } from 'utils/utils';
 import './ResponseRow.scss';
 
-const ResponseRow = ({ data }) => {
-   const [expanded, setValue] = useState(false);
+const getStatus = (status) => status === 'NOT_EXECUTED' ? 'skipped' : status.toLowerCase();
 
-   const handleRowClick = () => {
-      setValue(!expanded);
+const ResponseRow = ({ data }) => {
+   const [expanded, setExpanded] = useState(false);
+
+   const handleClick = (event) => {
+      if (event.target.nodeName !== "A") {
+         setExpanded(!expanded);
+      }
    }
 
    if (!data) {
       return '';
    }
 
+   const hasMessages = data.messages.length > 0;
+   const status = getStatus(data.status);
+
    return (
-      <div className="response-row">
-         <div className="info" onClick={handleRowClick}>
-            <div className="type">
-               <span className={`label label-${data.messageType.toLowerCase()}`}>{data.messageType}</span>
+      <div className={`response-row ${hasMessages ? 'response-row-with-messages' : ''}`}>
+         <div className="info" {...(hasMessages && { onClick: handleClick })}>
+            <div className="status">
+               <span className={`label label-${status}`}>{status}</span>
             </div>
-            <div className="name">{data.name} ({data.messages.length})</div>
+            <div className="name">
+               <span>{data.name} {hasMessages ? `(${data.messages.length})` : ''}</span>
+               {data.documentation ? <a className="documentation" href={data.documentation} target="_blank" rel="noreferrer">(Dokumentasjon)</a> : ''}
+            </div>
             <div className="id">
                <span className="label label-default">{data.id}</span>
             </div>
          </div>
-         <ul className="messages" style={{ display: expanded ? 'block' : 'none' }}>
-            {data.messages.map(message => <li key={createRandomId()}>{message.message}</li>)}
-         </ul>
+         {
+            hasMessages ?
+               <ul className="messages" style={{ display: expanded ? 'block' : 'none' }}>
+                  {data.messages.map(message => <li key={createRandomId()}>{message.message}</li>)}
+               </ul> :
+               ''
+         }
       </div>
    );
 };

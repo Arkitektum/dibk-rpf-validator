@@ -1,0 +1,55 @@
+.response-block {
+   margin-bottom: 15px;
+
+   h6 {
+      display: inline-block;
+      border-bottom: 1px solid transparent;
+   }
+
+   &.response-block-expandable {
+      h6 {
+         cursor: pointer;
+         user-select: none;
+   
+         &:hover {
+            border-bottom: 1px solid #212529;       
+         }
+
+         &::after {
+            content: "";
+            background: url(../../../../assets/gfx/icon-arrow.svg) no-repeat center;
+            width: 10px;
+            height: 14px;
+            display: inline-block;
+            background-size: 14px;
+            margin-left: 10px;
+            transform: rotate(90deg);
+            transition: all 0.25s ease;
+         }
+      }
+   }   
+
+   &.response-block-collapsed {
+      h6::after {
+         transform: rotate(0deg);
+      }
+
+      .response {
+         display: none;
+      }
+   }
+
+   .response {
+      margin: 15px 0 30px 0;
+      border: 1px solid #dddddd;
+      overscroll-behavior: contain;
+      max-height: 343px;
+      overflow-y: auto;
+
+      &.response-no-messages {
+         max-height: 229px;
+         overflow-y: auto;
+      }
+   }
+   
+}

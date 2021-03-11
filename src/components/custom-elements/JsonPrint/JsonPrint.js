@@ -19,12 +19,12 @@ const replacer = (match, pIndent, pKey, pValue, pEnd) => {
    return replaced + (pEnd || '');
 };
 
-const JsonPrint = ({ obj }) => {
-   if (!obj) {
+const JsonPrint = ({ data }) => {
+   if (!data) {
       return '';
    }
 
-   const htmlString = JSON.stringify(obj, null, 2)
+   const htmlString = JSON.stringify(data, null, 2)
       .replace(/&/g, '&amp;').replace(/\\"/g, '&quot;')
       .replace(/</g, '&lt;').replace(/>/g, '&gt;')
       .replace(jsonLineRegex, replacer);

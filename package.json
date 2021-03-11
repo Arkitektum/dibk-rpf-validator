@@ -1,5 +1,5 @@
 {
-  "name": "validation-client",
+  "name": "dibk-rpf-validator",
   "version": "1.0.0",
   "description": "DiBK - Valideringsklient for reguleringsplanforslag",
   "private": true,

@@ -1,9 +1,5 @@
 @import "~bootstrap/scss/bootstrap";
 
-html {
-   overflow-y: scroll;
-}
-
 body {
    margin: 0;
    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
@@ -14,6 +10,7 @@ body {
    background-repeat: no-repeat;
    background-attachment: fixed;
    font-size: 14px;
+   min-height: 2500px;
 }
 
 h4 {
@@ -25,3 +22,4 @@ h4 {
 .btn {
    font-size: 14px !important
 }
+
