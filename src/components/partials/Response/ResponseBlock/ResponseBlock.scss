@@ -42,14 +42,11 @@
    .response {
       margin: 15px 0 30px 0;
       border: 1px solid #dddddd;
-      overscroll-behavior: contain;
-      max-height: 343px;
-      overflow-y: auto;
 
-      &.response-no-messages {
-         max-height: 229px;
+      &.response-max-height {
+         overscroll-behavior: contain;
+         max-height: 343px;
          overflow-y: auto;
       }
-   }
-   
+   }   
 }

@@ -41,9 +41,9 @@ class Response extends Component {
                Tidsbruk: {timeUsed} sek.
             </div>
 
-            <ResponseBlock list={rulesWithMessages} title="Regler med feil eller advarsler" />
-            <ResponseBlock list={passedRules} title="Validerte regler" expandable={true} />
-            <ResponseBlock list={skippedRules} title="Regler som ikke er sjekket" expandable={true} />
+            <ResponseBlock list={rulesWithMessages} title="Regler med feil eller advarsler" expandable={false} maxHeight={false} />
+            <ResponseBlock list={passedRules} title="Validerte regler" />
+            <ResponseBlock list={skippedRules} title="Regler som ikke er sjekket" />
          </React.Fragment>
       );
    }
