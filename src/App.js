@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import Upload from 'components/partials/Response/Upload/Upload';
+import Upload from 'components/partials/Upload/Upload';
 import Response from 'components/partials/Response/Response';
 import JsonPrint from 'components/custom-elements/JsonPrint/JsonPrint';
 import Logo from 'assets/gfx/logo-dibk.svg';
