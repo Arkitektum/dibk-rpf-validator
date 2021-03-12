@@ -11,16 +11,19 @@ class Upload extends Component {
       super(props);
 
       this.state = {
-         validating: false,
+         username: '',
          oversendelse: undefined,
          planbestemmelser: undefined,
          plankart2D: undefined,
          plankart3D: undefined,
+         formValidated: false,
+         validating: false,
          dialogShow: false,
          dialogMessage: ''
       };
 
       this.validate = this.validate.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
       this.fileInputs = [];
 
       this.setFileInputRef = element => {
@@ -28,11 +31,23 @@ class Upload extends Component {
       };
    }
 
-   hasFiles() {
-      return this.state.oversendelse !== undefined ||
+   handleSubmit(event) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (event.currentTarget.checkValidity() === true) {
+         this.validate();
+      }
+
+      this.setState({ formValidated: true })
+   }
+
+   canValidate() {
+      return this.state.username !== '' &&
+         (this.state.oversendelse !== undefined ||
          this.state.planbestemmelser !== undefined ||
          this.state.plankart2D !== undefined ||
-         this.state.plankart3D !== undefined;
+         this.state.plankart3D !== undefined);
    }
 
    reset() {
@@ -48,12 +63,11 @@ class Upload extends Component {
    }
 
    async validate() {
-      if (!this.hasFiles()) {
+      if (!this.canValidate()) {
          return;
       }
 
       this.setState({ validating: true });
-      this.props.onUpload();
       const formData = new FormData();
 
       if (this.state.oversendelse) {
@@ -81,15 +95,15 @@ class Upload extends Component {
             data: formData,
             headers: {
                'Content-Type': 'multipart/form-data',
-               'System': 'validation-client'
+               'system': `Arkitektum valideringsklient v/${this.state.username}`
             }
          });
 
          data = response.data;
       } catch (error) {
-         this.setState({ 
-            dialogShow: true, 
-            dialogMessage: `En feil har oppstått: ${error}` 
+         this.setState({
+            dialogShow: true,
+            dialogMessage: `En feil har oppstått: ${error}`
          });
       } finally {
          this.reset();
@@ -100,51 +114,63 @@ class Upload extends Component {
    render() {
       return (
          <React.Fragment>
-            <div className="row">
-               <div className="col">
-                  <Form.Group controlId="formUploadOversendelse">
-                     <Form.Label>Oversendelse (XML)</Form.Label>
-                     <FileInput ref={this.setFileInputRef} accept=".xml" onChange={(files) => this.setState({ oversendelse: files[0] })} />
-                  </Form.Group>
+            <Form noValidate validated={this.state.formValidated} onSubmit={this.handleSubmit}>
+               <div className="row mb-2">
+                  <div className="col-6">
+                     <Form.Group controlId="formUsername">
+                        <Form.Label>Brukernavn</Form.Label>
+                        <Form.Control required type="text" onChange={(evt) => this.setState({ username: evt.target.value })} />
+                        <Form.Control.Feedback type="invalid">Vennligst fyll ut brukernavn</Form.Control.Feedback>                        
+                     </Form.Group>
+                  </div>
                </div>
-               <div className="col">
-                  <Form.Group controlId="formUploadPlanbestemmelser">
-                     <Form.Label>Planbestemmelser (XML)</Form.Label>
-                     <FileInput ref={this.setFileInputRef} accept=".xml" onChange={(files) => this.setState({ planbestemmelser: files[0] })} />
-                  </Form.Group>
-               </div>
-            </div>
 
-            <div className="row">
-               <div className="col">
-                  <Form.Group controlId="formUploadPlankart2d">
-                     <Form.Label>Plankart 2D (GML)</Form.Label>
-                     <FileInput ref={this.setFileInputRef} accept=".gml" onChange={(files) => this.setState({ plankart2D: files[0] })} />
-                  </Form.Group>
+               <div className="row">
+                  <div className="col">
+                     <Form.Group controlId="formUploadOversendelse">
+                        <Form.Label>Oversendelse (XML)</Form.Label>
+                        <FileInput ref={this.setFileInputRef} accept=".xml" onChange={(files) => this.setState({ oversendelse: files[0] })} />
+                     </Form.Group>
+                  </div>
+                  <div className="col">
+                     <Form.Group controlId="formUploadPlanbestemmelser">
+                        <Form.Label>Planbestemmelser (XML)</Form.Label>
+                        <FileInput ref={this.setFileInputRef} accept=".xml" onChange={(files) => this.setState({ planbestemmelser: files[0] })} />
+                     </Form.Group>
+                  </div>
                </div>
-               <div className="col">
-                  <Form.Group controlId="formUploadPlankart2d">
-                     <Form.Label>Plankart 3D (GML)</Form.Label>
-                     <FileInput ref={this.setFileInputRef} accept=".gml" onChange={(files) => this.setState({ plankart3D: files[0] })} />
-                  </Form.Group>
+
+               <div className="row">
+                  <div className="col">
+                     <Form.Group controlId="formUploadPlankart2d">
+                        <Form.Label>Plankart 2D (GML)</Form.Label>
+                        <FileInput ref={this.setFileInputRef} accept=".gml" onChange={(files) => this.setState({ plankart2D: files[0] })} />
+                     </Form.Group>
+                  </div>
+                  <div className="col">
+                     <Form.Group controlId="formUploadPlankart2d">
+                        <Form.Label>Plankart 3D (GML)</Form.Label>
+                        <FileInput ref={this.setFileInputRef} accept=".gml" onChange={(files) => this.setState({ plankart3D: files[0] })} />
+                     </Form.Group>
+                  </div>
                </div>
-            </div>
 
-            <div className="row mt-2 mb-3">
-               <div className="col">
-                  <Button onClick={this.validate} disabled={!this.hasFiles() || this.state.validating}>Validér</Button>
+               <div className="row mt-2 mb-3">
+                  <div className="col">
+                     <Button type="submit" disabled={!this.canValidate() || this.state.validating}>Validér</Button>
 
-                  {
-                     this.state.validating ?
-                        <div className="spinner-border" role="status">
-                           <span className="sr-only">Loading...</span>
-                        </div> :
-                        ''
-                  }
+                     {
+                        this.state.validating ?
+                           <div className="spinner-border" role="status">
+                              <span className="sr-only">Loading...</span>
+                           </div> :
+                           ''
+                     }
+                  </div>
                </div>
-            </div>
+            </Form>
 
-            <Dialog title="Validering feilet" message={this.state.dialogMessage} show={this.state.dialogShow} onHide={() => this.setState({ dialogShow: false })} />            
+            <Dialog title="Validering feilet" message={this.state.dialogMessage} show={this.state.dialogShow} onHide={() => this.setState({ dialogShow: false })} />
          </React.Fragment>
       );
    }
