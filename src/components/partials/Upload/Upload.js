@@ -3,7 +3,9 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import FileInput from 'components/custom-elements/FileInput/FileInput';
 import Dialog from 'components/custom-elements/Dialog/Dialog';
+import RuleSummary from '../RuleSummary/RuleSummary';
 import axios from 'axios';
+import InfoIcon from 'assets/gfx/icon-info.svg';
 import './Upload.scss';
 
 class Upload extends Component {
@@ -19,11 +21,14 @@ class Upload extends Component {
          formValidated: false,
          validating: false,
          dialogShow: false,
-         dialogMessage: ''
+         dialogMessage: '',
+         ruleSets: null,
+         ruleSetsShow: false
       };
 
       this.validate = this.validate.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
+      this.showRuleSets = this.showRuleSets.bind(this);
       this.fileInputs = [];
 
       this.setFileInputRef = element => {
@@ -45,9 +50,9 @@ class Upload extends Component {
    canValidate() {
       return this.state.username !== '' &&
          (this.state.oversendelse !== undefined ||
-         this.state.planbestemmelser !== undefined ||
-         this.state.plankart2D !== undefined ||
-         this.state.plankart3D !== undefined);
+            this.state.planbestemmelser !== undefined ||
+            this.state.plankart2D !== undefined ||
+            this.state.plankart3D !== undefined);
    }
 
    reset() {
@@ -60,6 +65,25 @@ class Upload extends Component {
          plankart3D: undefined,
          validating: false
       });
+   }
+
+   async getRuleSets() {
+      try {
+         const response = await axios({
+            method: 'get',
+            url: process.env.REACT_APP_API_BASE_URL + '/regler',
+            headers: {
+               'system': `Arkitektum valideringsklient v/${this.state.username}`
+            }
+         });
+
+         this.setState({ ruleSets: response.data });
+      } catch (error) {
+         this.setState({
+            dialogShow: true,
+            dialogMessage: `En feil har oppstått: ${error}`
+         });
+      }
    }
 
    async validate() {
@@ -91,7 +115,7 @@ class Upload extends Component {
       try {
          const response = await axios({
             method: 'post',
-            url: process.env.REACT_APP_API_BASE_URL,
+            url: process.env.REACT_APP_API_BASE_URL + '/filer',
             data: formData,
             headers: {
                'Content-Type': 'multipart/form-data',
@@ -111,6 +135,17 @@ class Upload extends Component {
       }
    }
 
+   async showRuleSets(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      
+      if (!this.state.ruleSets) {
+         await this.getRuleSets();
+      }
+
+      this.setState({ ruleSetsShow: true });
+   }
+
    render() {
       return (
          <React.Fragment>
@@ -120,7 +155,7 @@ class Upload extends Component {
                      <Form.Group controlId="formUsername">
                         <Form.Label>Brukernavn</Form.Label>
                         <Form.Control required type="text" onChange={(evt) => this.setState({ username: evt.target.value })} />
-                        <Form.Control.Feedback type="invalid">Vennligst fyll ut brukernavn</Form.Control.Feedback>                        
+                        <Form.Control.Feedback type="invalid">Vennligst fyll ut brukernavn</Form.Control.Feedback>
                      </Form.Group>
                   </div>
                </div>
@@ -157,18 +192,27 @@ class Upload extends Component {
 
                <div className="row mt-2 mb-3">
                   <div className="col">
-                     <Button type="submit" disabled={!this.canValidate() || this.state.validating}>Validér</Button>
+                     <div className="form-footer">
+                        <div>
+                           <Button type="submit" disabled={!this.canValidate() || this.state.validating}>Validér</Button>
+                           {
+                              this.state.validating ?
+                                 <div className="spinner-border" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                 </div> :
+                                 ''
+                           }
+                        </div>
 
-                     {
-                        this.state.validating ?
-                           <div className="spinner-border" role="status">
-                              <span className="sr-only">Loading...</span>
-                           </div> :
-                           ''
-                     }
+                        <Button variant="link" onClick={this.showRuleSets}>
+                           <img className="icon-info" src={InfoIcon} alt="Oversikt over valideringsregler" />Oversikt over valideringsregler
+                        </Button>
+                     </div>
                   </div>
                </div>
             </Form>
+
+            <RuleSummary ruleSets={this.state.ruleSets} show={this.state.ruleSetsShow} onHide={() => this.setState({ ruleSetsShow: false })} />
 
             <Dialog title="Validering feilet" message={this.state.dialogMessage} show={this.state.dialogShow} onHide={() => this.setState({ dialogShow: false })} />
          </React.Fragment>

@@ -24,6 +24,14 @@ h4 {
    font-size: 14px !important;
 }
 
+.btn-link {
+   padding: 0;
+
+   &:focus {
+      box-shadow: none;
+   }
+}
+
 .was-validated .custom-file-input:valid ~ .custom-file-label,
 .custom-file-input.is-valid ~ .custom-file-label,
 .was-validated .form-control:valid,
