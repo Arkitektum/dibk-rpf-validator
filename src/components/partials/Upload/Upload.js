@@ -93,7 +93,7 @@ class Upload extends Component {
       try {
          const response = await axios({
             method: 'post',
-            url: process.env.REACT_APP_API_BASE_URL + '/filer',
+            url: process.env.REACT_APP_API_BASE_URL + '/validering/filer',
             data: formData,
             headers: {
                'Content-Type': 'multipart/form-data',
