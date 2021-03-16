@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { showDialog } from 'store/slices/dialogSlice';
+import { FileInput } from 'components/custom-elements';
+import { RuleSets } from 'components/partials';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import FileInput from 'components/custom-elements/FileInput/FileInput';
-import Dialog from 'components/custom-elements/Dialog/Dialog';
-import RuleSummary from '../RuleSummary/RuleSummary';
 import axios from 'axios';
-import InfoIcon from 'assets/gfx/icon-info.svg';
 import './Upload.scss';
 
 class Upload extends Component {
@@ -21,14 +21,11 @@ class Upload extends Component {
          formValidated: false,
          validating: false,
          dialogShow: false,
-         dialogMessage: '',
-         ruleSets: null,
-         ruleSetsShow: false
+         dialogMessage: ''
       };
 
       this.validate = this.validate.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
-      this.showRuleSets = this.showRuleSets.bind(this);
       this.fileInputs = [];
 
       this.setFileInputRef = element => {
@@ -65,25 +62,6 @@ class Upload extends Component {
          plankart3D: undefined,
          validating: false
       });
-   }
-
-   async getRuleSets() {
-      try {
-         const response = await axios({
-            method: 'get',
-            url: process.env.REACT_APP_API_BASE_URL + '/regler',
-            headers: {
-               'system': `Arkitektum valideringsklient v/${this.state.username}`
-            }
-         });
-
-         this.setState({ ruleSets: response.data });
-      } catch (error) {
-         this.setState({
-            dialogShow: true,
-            dialogMessage: `En feil har oppstått: ${error}`
-         });
-      }
    }
 
    async validate() {
@@ -125,25 +103,11 @@ class Upload extends Component {
 
          data = response.data;
       } catch (error) {
-         this.setState({
-            dialogShow: true,
-            dialogMessage: `En feil har oppstått: ${error}`
-         });
+         this.props.dispatch(showDialog({ title: 'En feil har oppstått', message: error.message }));
       } finally {
          this.reset();
          this.props.onValidated(data);
       }
-   }
-
-   async showRuleSets(event) {
-      event.preventDefault();
-      event.stopPropagation();
-      
-      if (!this.state.ruleSets) {
-         await this.getRuleSets();
-      }
-
-      this.setState({ ruleSetsShow: true });
    }
 
    render() {
@@ -203,21 +167,14 @@ class Upload extends Component {
                                  ''
                            }
                         </div>
-
-                        <Button variant="link" onClick={this.showRuleSets}>
-                           <img className="icon-info" src={InfoIcon} alt="Oversikt over valideringsregler" />Oversikt over valideringsregler
-                        </Button>
+                        <RuleSets  />                        
                      </div>
                   </div>
                </div>
             </Form>
-
-            <RuleSummary ruleSets={this.state.ruleSets} show={this.state.ruleSetsShow} onHide={() => this.setState({ ruleSetsShow: false })} />
-
-            <Dialog title="Validering feilet" message={this.state.dialogMessage} show={this.state.dialogShow} onHide={() => this.setState({ dialogShow: false })} />
          </React.Fragment>
       );
    }
 }
 
-export default Upload
+export default connect(state => state.dialog)(Upload);

@@ -1,7 +1,8 @@
 import { Component } from 'react';
-import Upload from 'components/partials/Upload/Upload';
-import Response from 'components/partials/Response/Response';
-import JsonPrint from 'components/custom-elements/JsonPrint/JsonPrint';
+import { Provider } from 'react-redux';
+import store from './store';
+import { Upload, Response } from 'components/partials';
+import { JsonPrint, Dialog } from 'components/custom-elements';
 import Logo from 'assets/gfx/logo-dibk.svg';
 import './App.scss';
 
@@ -27,22 +28,25 @@ class App extends Component {
 
    render() {
       return (
-         <div className="App">
-            <div className="container">
-               <header>
-                  <h1>
-                     <img src={Logo} alt="DiBK" />Validering av reguleringsplanforslag
+         <Provider store={store}>
+            <div className="App">
+               <div className="container">
+                  <header>
+                     <h1>
+                        <img src={Logo} alt="DiBK" />Validering av reguleringsplanforslag
                   </h1>
-               </header>
+                  </header>
 
-               <div className="paper">
-                  <h4>Last opp filer</h4>
-                  <Upload onUpload={this.handleUpload} onValidated={this.handleValidated} />
+                  <div className="paper">
+                     <h4>Last opp filer</h4>
+                     <Upload onUpload={this.handleUpload} onValidated={this.handleValidated} />
+                  </div>
+
+                  {this.renderResponse()}
                </div>
-
-               {this.renderResponse()}
             </div>
-         </div>
+            <Dialog />
+         </Provider>
       );
    }
 
