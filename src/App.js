@@ -56,7 +56,7 @@ class App extends Component {
       }
 
       return (
-         <div>
+         <div className="response">
             <div className="paper">
                <h4>Resultat</h4>
                <Response data={this.state.apiResponse} />
