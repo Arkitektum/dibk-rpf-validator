@@ -106,12 +106,13 @@ class RuleSets extends Component {
                <span className={`label label-${rule.messageType.toLowerCase()}`}>{rule.messageType}</span>
             </div>
             <div className="name">
-               <span>{rule.name}</span>
-               {rule.documentation ? <a className="documentation" href={rule.documentation} target="_blank" rel="noreferrer">(Dokumentasjon)</a> : ''}
+               <div>
+                  <span>{rule.name}</span>
+                  {rule.documentation ? <a className="documentation" href={rule.documentation} target="_blank" rel="noreferrer">(Dokumentasjon)</a> : ''}
+               </div>
+               {rule.description ? <span className="description">{rule.description}</span> : ''}
             </div>
-            <div className="id">
-               <span className="label label-default">{rule.id}</span>
-            </div>
+            <div className="id">{rule.id}</div>
          </div>
       )
    }

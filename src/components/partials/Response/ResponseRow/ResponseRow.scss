@@ -8,11 +8,12 @@
    .info {
       user-select: none;
       border-top: 1px solid #dddddd;
-      padding: 8px 6px;
+      padding: 8px;
       font-size: 0;
+      display: flex;
 
       > * {
-         display: inline-block;
+         align-self: center;
          font-size: 14px;
       }
 
@@ -21,15 +22,24 @@
       }
 
       .name {
-         width: 79%;
+         width: 80%;
+         padding-right: 10px;
          
          .documentation {
             margin-left: 10px;
          }
+
+         .description {
+            font-size: 12px;
+            display: block;
+            margin-top: 2px;
+         }
       }
 
       .id {
-         width: 10%;
+         width: 9%;
+         text-align: right;
+         font-size: 12px;
       }
    }
    

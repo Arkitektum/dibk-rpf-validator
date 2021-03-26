@@ -27,12 +27,13 @@ const ResponseRow = ({ data }) => {
                <span className={`label label-${status}`}>{status}</span>
             </div>
             <div className="name">
-               <span>{data.name} {hasMessages ? `(${data.messages.length})` : ''}</span>
-               {data.documentation ? <a className="documentation" href={data.documentation} target="_blank" rel="noreferrer">(Dokumentasjon)</a> : ''}
+               <div>
+                  <span>{data.name} {hasMessages ? `(${data.messages.length})` : ''}</span>
+                  {data.documentation ? <a className="documentation" href={data.documentation} target="_blank" rel="noreferrer">(Dokumentasjon)</a> : ''}
+               </div>
+               {data.description ? <span className="description">{data.description}</span> : ''}
             </div>
-            <div className="id">
-               <span className="label label-default">{data.id}</span>
-            </div>
+            <div className="id">{data.id}</div>
          </div>
          {
             hasMessages ?
