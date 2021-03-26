@@ -35,28 +35,28 @@ class Response extends Component {
          <React.Fragment>
             <div className="summary">
                <div className="row">
-                  <div className="col">Datasett:</div>
-                  <div className="col">{data.files.join(', ')}</div>
+                  <div className="col-2">Datasett:</div>
+                  <div className="col-10">{data.files.join(', ')}</div>
                </div>
                <div className="row">
-                  <div className="col">Antall feil:</div>
-                  <div className="col">{data.errors}</div>
+                  <div className="col-2">Antall feil:</div>
+                  <div className="col-10">{data.errors}</div>
                </div>
                <div className="row">
-                  <div className="col">Antall advarsler:</div>
-                  <div className="col">{data.warnings}</div>
+                  <div className="col-2">Antall advarsler:</div>
+                  <div className="col-10">{data.warnings}</div>
                </div>
                <div className="row">
-                  <div className="col">Antall regler sjekket:</div>
-                  <div className="col">{rulesCheckedCount}</div>
+                  <div className="col-2">Antall regler sjekket:</div>
+                  <div className="col-10">{rulesCheckedCount}</div>
                </div>
                <div className="row">
-                  <div className="col">Antall regler totalt:</div>
-                  <div className="col">{data.validationRules.length}</div>
+                  <div className="col-2">Antall regler totalt:</div>
+                  <div className="col-10">{data.validationRules.length}</div>
                </div>
                <div className="row">
-                  <div className="col">Tidsbruk:</div>
-                  <div className="col">{timeUsed} sek.</div>
+                  <div className="col-2">Tidsbruk:</div>
+                  <div className="col-10">{timeUsed} sek.</div>
                </div>
             </div>
 
