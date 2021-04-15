@@ -6,6 +6,7 @@ import { RuleSets } from 'components/partials';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
+import latinize from 'latinize';
 import './Upload.scss';
 
 class Upload extends Component {
@@ -96,8 +97,8 @@ class Upload extends Component {
             url: process.env.REACT_APP_API_BASE_URL + '/validering/filer',
             data: formData,
             headers: {
-               'Content-Type': 'multipart/form-data',
-               'system': `Arkitektum valideringsklient v/${this.state.username}`
+               'Content-Type': 'multipart/form-data; charset=UTF-8"',
+               'system': `Arkitektum valideringsklient v/${latinize(this.state.username)}`
             }
          });
 
