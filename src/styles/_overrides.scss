@@ -1,0 +1,90 @@
+
+.modal-open {
+   padding-right: 0 !important;
+}
+
+.form-control,
+.btn {
+   font-size: 14px !important;
+}
+
+.btn-link {
+   padding: 0;
+
+   &:focus {
+      box-shadow: none;
+   }
+}
+
+.was-validated .custom-file-input:valid ~ .custom-file-label,
+.custom-file-input.is-valid ~ .custom-file-label,
+.was-validated .form-control:valid,
+.form-control.is-valid {
+   border-color: #ced4da;
+}
+
+.was-validated .custom-file-input:valid:focus ~ .custom-file-label,
+.custom-file-input.is-valid:focus ~ .custom-file-label,
+.was-validated .form-control:valid:focus,
+.form-control.is-valid:focus {
+   border-color: #80bdff;
+   box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+}
+
+.nav-tabs {
+   border-bottom: 0;
+
+   .nav-link {
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: #f8f8f8;
+      border: 1px solid #dee2e6;
+      font-weight: 400;
+      color: #212529;
+      border-radius: 0;
+      margin-left: -1px;
+
+      &:hover,
+      &:focus {
+         border-color: #dee2e6;
+      }
+
+      &:first-child {
+         margin-left: 0;
+      }
+
+      &.active {
+         background-color: #ffffff;
+         font-weight: 500;
+         position: relative;
+         cursor: default;
+         border-bottom: 0;
+
+         &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: -7px;
+            left: -1px;
+            height: 7px;
+            width: calc(100% + 2px);
+            background-color: #8aaec3;
+         }
+      }
+   }
+}
+
+.dropdown-item {
+   cursor: default !important;
+   user-select: none;
+
+   &:active {
+      background-color: #8aaec3;
+   }
+}
+
+.show > .btn-primary.dropdown-toggle {
+   border-color: #80bdff !important;
+   outline: 0;
+   box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%) !important;
+}

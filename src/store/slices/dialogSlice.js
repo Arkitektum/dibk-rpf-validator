@@ -10,7 +10,7 @@ export const dialogSlice = createSlice({
    name: 'dialog',
    initialState,
    reducers: {
-      showDialog: (state, action) => {     
+      showDialog: (state, action) => {   
          state.show = true;
          Object.assign(state, action.payload);
       },

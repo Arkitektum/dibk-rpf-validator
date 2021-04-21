@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { createRandomId } from 'utils/utils';
+import { createRandomId } from 'utils';
 import './ResponseRow.scss';
 
 const getStatus = (status) => status === 'NOT_EXECUTED' ? 'skipped' : status.toLowerCase();

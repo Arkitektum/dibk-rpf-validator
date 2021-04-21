@@ -1,0 +1,27 @@
+import axios from 'axios';
+import latinize from 'latinize';
+import store from 'store';
+import { showDialog } from 'store/slices/dialogSlice';
+
+export const sendAsync = async (url, data, username, options = {}) => {
+   try {
+      const defaultOptions = {
+         method: 'post',
+         url,
+         data,
+         headers: {
+            'Content-Type': 'multipart/form-data',
+            'system': `Arkitektum demonstrator v/${latinize(username)}`
+         }
+      };
+
+      const response = await axios(Object.assign(defaultOptions, options));
+
+      return response.data;
+   } catch (error) {
+      const message = error.response.data ? error.response.data : error.message;
+      store.dispatch(showDialog({ title: 'En feil har oppstått', message }));
+   }
+}
+
+export const createRandomId = () => Math.random().toString(36).substring(4);

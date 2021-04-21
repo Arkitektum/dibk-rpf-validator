@@ -1,6 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
-import { createRandomId } from 'utils/utils';
+import { createRandomId } from 'utils';
 import './FileInput.scss';
 
 class FileInput extends Component {

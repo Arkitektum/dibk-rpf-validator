@@ -1,4 +1,9 @@
 @import "~bootstrap/scss/bootstrap";
+@import "./styles/overrides";
+
+html {
+   overflow-y: scroll;
+}
 
 body {
    margin: 0;
@@ -9,39 +14,11 @@ body {
    background-image: linear-gradient(164deg, rgba(137, 174, 196, 0.34), #fff, rgba(0, 117, 127, 0.19));
    background-repeat: no-repeat;
    background-attachment: fixed;
-   font-size: 14px;   
+   font-size: 14px;
 }
 
 h4 {
    border-bottom: 1px solid #dddddd;
    padding-bottom: 10px;
    margin-bottom: 20px;
-}
-
-.form-control,
-.btn {
-   font-size: 14px !important;
-}
-
-.btn-link {
-   padding: 0;
-
-   &:focus {
-      box-shadow: none;
-   }
-}
-
-.was-validated .custom-file-input:valid ~ .custom-file-label,
-.custom-file-input.is-valid ~ .custom-file-label,
-.was-validated .form-control:valid,
-.form-control.is-valid {
-   border-color: #ced4da;
-}
-
-.was-validated .custom-file-input:valid:focus ~ .custom-file-label,
-.custom-file-input.is-valid:focus ~ .custom-file-label,
-.was-validated .form-control:valid:focus,
-.form-control.is-valid:focus {
-   border-color: #80bdff;
-   box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
 }

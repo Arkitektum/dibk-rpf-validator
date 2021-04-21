@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import ResponseRow from '../ResponseRow/ResponseRow';
-import { createRandomId } from 'utils/utils';
+import { createRandomId } from 'utils';
 import './ResponseBlock.scss';
 
 const ResponseBlock = ({ title, list, expandable = true, maxHeight = true }) => {

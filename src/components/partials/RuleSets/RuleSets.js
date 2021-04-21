@@ -5,7 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import InfoIcon from 'assets/gfx/icon-info.svg';
-import { createRandomId } from 'utils/utils';
+import { createRandomId } from 'utils';
 import './RuleSets.scss';
 
 class RuleSets extends Component {
@@ -40,9 +40,9 @@ class RuleSets extends Component {
       try {
          const response = await axios({
             method: 'get',
-            url: process.env.REACT_APP_API_BASE_URL + '/regler',
+            url: this.props.apiUrl,
             headers: {
-               'system': 'Arkitektum valideringsklient'
+               'system': 'Arkitektum demonstrator'
             }
          });
 

@@ -1,74 +1,54 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import { Provider } from 'react-redux';
+import Form from 'react-bootstrap/Form';
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab';
+import { ConvertPlanbestemmelser, ValidatePlanforslag, ValidatePlanomriss } from 'components/partials';
+import { Dialog } from 'components/custom-elements';
 import store from './store';
-import { Upload, Response } from 'components/partials';
-import { JsonPrint, Dialog } from 'components/custom-elements';
 import Logo from 'assets/gfx/logo-dibk.svg';
 import './App.scss';
 
-class App extends Component {
-   constructor(props) {
-      super(props);
+const App = () => {
+   const [username, setUsername] = useState('');
 
-      this.state = {
-         apiResponse: null
-      };
+   return (
+      <Provider store={store}>
+         <div className="App">
+            <div className="container">
+               <header>
+                  <h1>
+                     <img src={Logo} alt="DiBK" />Fellestjenester PLAN |<span>Demonstrator</span>
+                  </h1>
+               </header>
 
-      this.handleUpload = this.handleUpload.bind(this);
-      this.handleValidated = this.handleValidated.bind(this);
-   }
-
-   handleUpload() {
-      this.setState({ apiResponse: null });
-   }
-
-   handleValidated(data) {
-      this.setState({ apiResponse: data });
-   }
-
-   render() {
-      return (
-         <Provider store={store}>
-            <div className="App">
-               <div className="container">
-                  <header>
-                     <h1>
-                        <img src={Logo} alt="DiBK" />Validering av reguleringsplanforslag
-                     </h1>
-                  </header>
-
-                  <div className="paper">
-                     <h4>Last opp filer</h4>
-                     <Upload onUpload={this.handleUpload} onValidated={this.handleValidated} />
+               <div className="row mb-3">
+                  <div className="col-3">
+                     <Form>
+                        <Form.Group controlId="formUsername">
+                           <Form.Label>Brukernavn</Form.Label>
+                           <Form.Control required type="text" onChange={event => setUsername(event.target.value)} />
+                        </Form.Group>
+                     </Form>
                   </div>
-
-                  {this.renderResponse()}
                </div>
-            </div>
-            <Dialog />
-         </Provider>
-      );
-   }
 
-   renderResponse() {
-      if (!this.state.apiResponse) {
-         return '';
-      }
-
-      return (
-         <div className="response">
-            <div className="paper">
-               <h4>Resultat</h4>
-               <Response data={this.state.apiResponse} />
-            </div>
-
-            <div className="paper">
-               <h4>Svar fra API</h4>
-               <JsonPrint data={this.state.apiResponse} />
+               <Tabs defaultActiveKey="validate-planforslag" id="tabs" transition={false}>
+                  <Tab eventKey="validate-planforslag" title="Validering av reguleringsplanforslag">
+                     <ValidatePlanforslag username={username} />
+                  </Tab>
+                  <Tab eventKey="validate-planomriss" title="Validering av planomriss">
+                     <ValidatePlanomriss username={username} />
+                  </Tab>
+                  <Tab eventKey="convert-planbestemmelser" title="Konvertering av planbestemmelser">
+                     <ConvertPlanbestemmelser username={username} />
+                  </Tab>
+               </Tabs>
             </div>
          </div>
-      );
-   }
+         <Dialog />
+      </Provider>
+   );
 }
 
 export default App;

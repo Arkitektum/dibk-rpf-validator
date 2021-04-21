@@ -4,13 +4,25 @@
    margin: 15px auto 50px auto;
 }
 
+header {
+   margin-bottom: 25px;
+}
+
 h1 {
-   font-size: 36px;
+   font-size: 32px;
+   font-weight: 400;
    margin-bottom: 0;
 
    img {
-      width: 175px;
-      height: 175px;
+      width: 125px;
+      margin-right: 25px;
+   }
+
+   span {
+      font-size: 22px;
+      margin-left: 9px;
+      vertical-align: 2px;
+      font-weight: 100;
    }
 }
 
@@ -20,11 +32,33 @@ h6 {
 
 .paper {
    background: #ffffff;
-   box-shadow: 0 2px 3px rgb(0 0 0 / 12%);
+   border: 1px solid #dee2e6;
    padding: 24px 28px;
-   margin: 20px 0;
+   margin: 0 0 40px 0;
+}
+
+.tab-content > .tab-pane > .paper {
+   padding-top: 32px;
 }
 
 .response {
    margin-bottom: 800px;
+}
+
+.spinner-border {
+   width: 23px;
+   height: 23px;
+   margin: -4px 10px;
+   color: #6f92a7;
+}
+
+.form-footer {
+   display: flex;
+   justify-content: space-between;
+}
+
+.icon-info {
+   width: 26px;
+   vertical-align: -8px;
+   margin-right: 3px;
 }
