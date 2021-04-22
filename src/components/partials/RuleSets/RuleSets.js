@@ -1,105 +1,71 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { showDialog } from 'store/slices/dialogSlice';
+import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import axios from 'axios';
 import InfoIcon from 'assets/gfx/icon-info.svg';
-import { createRandomId } from 'utils';
+import { createRandomId, sendAsync } from 'utils';
 import './RuleSets.scss';
 
-class RuleSets extends Component {
-   constructor(props) {
-      super(props);
+const RuleSets = ({ apiUrl, username }) => {
+   const [ruleSets, setRuleSets] = useState(null);
+   const [dialogShow, setDialogShow] = useState(false);
 
-      this.state = {
-         ruleSets: null,
-         dialogShow: false
-      };
+   const handleClose = () => setDialogShow(false);
 
-      this.showRuleSets = this.showRuleSets.bind(this);
-      this.handleOnHide = this.handleOnHide.bind(this);
-   }
-
-   handleOnHide() {
-      this.setState({ dialogShow: false });
-   }
-
-   async showRuleSets(event) {      
+   const showRuleSets = async event => {
       event.preventDefault();
       event.stopPropagation();
 
-      if (!this.state.ruleSets) {
-         await this.loadRuleSets();
+      if (!ruleSets) {
+         await loadRuleSets();
       }
 
-      this.setState({ dialogShow: true });
+      setDialogShow(true);
    }
 
-   async loadRuleSets() {
-      try {
-         const response = await axios({
-            method: 'get',
-            url: this.props.apiUrl,
-            headers: {
-               'system': 'Arkitektum demonstrator'
-            }
-         });
+   const loadRuleSets = async () => {
+      const data = await sendAsync(apiUrl, null, username, { method: 'get' });
 
-         this.setState({ ruleSets: response.data });
-      } catch (error) {
-         this.props.dispatch(showDialog({ title: 'En feil har oppstått', message: error.message }));
+      if (data) {
+         setRuleSets(data);
       }
    }
 
-   render() {
-      return (
-         <React.Fragment>
-            <Button variant="link" onClick={this.showRuleSets}>
-               <img className="icon-info" src={InfoIcon} alt="Oversikt over valideringsregler" />Oversikt over valideringsregler
-            </Button>
-
-            {this.renderDialog()}
-         </React.Fragment>
-      );
-   }
-
-   renderDialog() {
-      if (!this.state.ruleSets) {
+   const renderDialog = () => {
+      if (!ruleSets) {
          return '';
       }
 
-      const ruleCount = this.state.ruleSets.reduce((total, ruleSet) => total + ruleSet.rules.length, 0);
+      const ruleCount = ruleSets.reduce((total, ruleSet) => total + ruleSet.rules.length, 0);
 
       return (
-         <Modal show={this.state.dialogShow} onHide={this.handleOnHide} animation={false} dialogClassName="rule-summary-dialog" centered>
+         <Modal show={dialogShow} onHide={handleClose} animation={false} dialogClassName="rule-summary-dialog" centered>
             <Modal.Header closeButton>
                <Modal.Title>Valideringsregler ({ruleCount})</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                <div>
-                  {this.state.ruleSets.map(ruleSet => this.renderSummary(ruleSet))}
+                  {ruleSets.map(ruleSet => renderSummary(ruleSet))}
                </div>
             </Modal.Body>
             <Modal.Footer>
-               <Button variant="primary" onClick={this.handleOnHide}>Lukk</Button>
+               <Button variant="primary" onClick={handleClose}>Lukk</Button>
             </Modal.Footer>
          </Modal>
       );
    }
 
-   renderSummary(ruleSet) {
+   const renderSummary = ruleSet => {
       return (
          <div className="ruleset" key={createRandomId()}>
             <h6>{ruleSet.category} ({ruleSet.rules.length})</h6>
             <div className="rules">
-               {ruleSet.rules.map(rule => this.renderRule(rule))}
+               {ruleSet.rules.map(rule => renderRule(rule))}
             </div>
          </div>
       );
    }
 
-   renderRule(rule) {
+   const renderRule = rule => {
       return (
          <div key={createRandomId()} className="rule">
             <div className="type">
@@ -116,6 +82,16 @@ class RuleSets extends Component {
          </div>
       )
    }
+   
+   return (
+      <React.Fragment>
+         <Button variant="link" onClick={showRuleSets}>
+            <img className="icon-info" src={InfoIcon} alt="Oversikt over valideringsregler" />Oversikt over valideringsregler
+         </Button>
+
+         {renderDialog()}
+      </React.Fragment>
+   );
 }
 
-export default connect(state => state.dialog)(RuleSets);
+export default RuleSets;

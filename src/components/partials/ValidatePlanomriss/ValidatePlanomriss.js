@@ -68,7 +68,7 @@ const ValidatePlanomriss = ({ username }) => {
                                  ''
                            }
                         </div>
-                        <RuleSets apiUrl={RULES_URL} />
+                        <RuleSets apiUrl={RULES_URL} username={username} />
                      </div>
                   </div>
                </div>
