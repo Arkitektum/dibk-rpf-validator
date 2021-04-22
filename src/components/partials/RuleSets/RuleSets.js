@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import InfoIcon from 'assets/gfx/icon-info.svg';
-import { createRandomId, sendAsync } from 'utils';
+import { sendAsync } from 'utils/api';
 import './RuleSets.scss';
 
 const RuleSets = ({ apiUrl, username }) => {
@@ -44,7 +44,7 @@ const RuleSets = ({ apiUrl, username }) => {
             </Modal.Header>
             <Modal.Body>
                <div>
-                  {ruleSets.map(ruleSet => renderSummary(ruleSet))}
+                  {ruleSets.map((ruleSet, index) => renderSummary(ruleSet, index))}
                </div>
             </Modal.Body>
             <Modal.Footer>
@@ -54,20 +54,20 @@ const RuleSets = ({ apiUrl, username }) => {
       );
    }
 
-   const renderSummary = ruleSet => {
+   const renderSummary = (ruleSet, index) => {
       return (
-         <div className="ruleset" key={createRandomId()}>
+         <div className="ruleset" key={index}>
             <h6>{ruleSet.category} ({ruleSet.rules.length})</h6>
             <div className="rules">
-               {ruleSet.rules.map(rule => renderRule(rule))}
+               {ruleSet.rules.map((rule, idx) => renderRule(rule, idx))}
             </div>
          </div>
       );
    }
 
-   const renderRule = rule => {
+   const renderRule = (rule, index) => {
       return (
-         <div key={createRandomId()} className="rule">
+         <div key={index} className="rule">
             <div className="type">
                <span className={`label label-${rule.messageType.toLowerCase()}`}>{rule.messageType}</span>
             </div>

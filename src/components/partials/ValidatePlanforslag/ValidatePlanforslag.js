@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { FileInput } from 'components/custom-elements';
 import { RuleSets, ValidationReponse } from 'components/partials';
-import { sendAsync } from 'utils';
+import { sendAsync } from 'utils/api';
 
 const VALIDATE_URL = process.env.REACT_APP_PLANFORSLAG_VALIDATE_URL;
 const RULES_URL = process.env.REACT_APP_PLANFORSLAG_RULES_URL;
@@ -23,6 +23,8 @@ const ValidatePlanforslag = ({ username }) => {
       }
 
       setIsValidating(true);
+      setApiResponse(null);
+      
       const data = await sendAsync(VALIDATE_URL, getFormData(), username);
       reset();
 
@@ -57,7 +59,7 @@ const ValidatePlanforslag = ({ username }) => {
       return formData;
    }
 
-   const reset = () => {
+   const reset = () => {     
       fileInputs.forEach(fileInput => fileInput.reset());
       setOversendelse(undefined);
       setPlanbestemmelser(undefined);

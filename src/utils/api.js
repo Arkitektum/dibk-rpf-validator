@@ -16,12 +16,10 @@ export const sendAsync = async (url, data, username, options = {}) => {
       };
 
       const response = await axios(Object.assign(defaultOptions, options));
-
       return response.data;
    } catch (error) {
-      const message = error.response.data ? error.response.data : error.message;
+      const message = (error.response && error.response.data) ? error.response.data : error.message;
       store.dispatch(showDialog({ title: 'En feil har oppstått', message }));
    }
 }
 
-export const createRandomId = () => Math.random().toString(36).substring(4);

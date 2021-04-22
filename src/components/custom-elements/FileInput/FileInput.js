@@ -1,52 +1,44 @@
-import React from 'react';
-import { Component } from 'react';
-import { createRandomId } from 'utils';
+import { useState, useRef, useImperativeHandle, forwardRef } from 'react';
 import './FileInput.scss';
 
-class FileInput extends Component {
-   constructor(props) {
-      super(props);
+const createRandomId = () => Math.random().toString(36).substring(4);
 
-      this.defaultPlaceholder = `Ingen ${this.props.multiple ? 'filer' : 'fil'} valgt...`;
-      this.inputId = createRandomId();
-      this.handleChange = this.handleChange.bind(this);
-      this.fileInput = React.createRef();
+const FileInput = forwardRef(({ onChange, accept, multiple, maxFiles = -1 }, ref) => {
+   const defaultPlaceholder = `Ingen ${multiple ? 'filer' : 'fil'} valgt...`;
+   const inputId = createRandomId();      
+   const [placeholder, setPlaceholder] = useState(defaultPlaceholder);
+   const fileInput = useRef(null);
 
-      this.state = {
-         onChange: this.props.onChange || (() => { }),
-         placeholder: this.defaultPlaceholder,
-         maxFiles: props.maxFiles || -1
-      };
+   useImperativeHandle(ref, () => ({
+      reset() {
+         resetInput();
+      }
+   }));
+
+   const resetInput = () => {
+      fileInput.current.value = '';
+      setPlaceholder(defaultPlaceholder);
    }
 
-   reset() {
-      this.fileInput.current.value = '';
-      this.setState({ placeholder: this.defaultPlaceholder });
-   }
-
-   handleChange(event) {
+   const handleChange = event => {
       const files = Array.from(event.target.files);
 
-      if (this.state.maxFiles !== -1 && files.length > this.state.maxFiles) {
-         this.reset();
-         this.state.onChange([]);
+      if (maxFiles !== -1 && files.length > maxFiles) {
+         resetInput();
+         onChange([]);
          return;
       }
 
-      this.state.onChange(files);
-      this.setState({ placeholder: files.map(file => file.name).join(', ') });
+      onChange(files);
+      setPlaceholder(files.map(file => file.name).join(', '));
    }
 
-   render() {
-      const placeholder = this.state.placeholder ? this.state.placeholder : this.defaultPlaceholder;
-
-      return (
-         <div className="custom-file">
-            <input type="file" ref={this.fileInput} accept={this.props.accept} id={this.inputId} multiple={this.props.multiple} className="custom-file-input" onChange={this.handleChange} />
-            <label className="custom-file-label" htmlFor={this.inputId}>{placeholder}</label>
-         </div>
-      );
-   }
-}
+   return (
+      <div className="custom-file">
+         <input type="file" ref={fileInput} accept={accept} id={inputId} multiple={multiple} className="custom-file-input" onChange={handleChange} />
+         <label className="custom-file-label" htmlFor={inputId}>{placeholder}</label>
+      </div>
+   );
+});
 
 export default FileInput

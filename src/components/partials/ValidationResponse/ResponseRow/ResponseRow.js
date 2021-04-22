@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { createRandomId } from 'utils';
 import './ResponseRow.scss';
 
 const getStatus = (status) => status === 'NOT_EXECUTED' ? 'skipped' : status.toLowerCase();
@@ -38,7 +37,7 @@ const ResponseRow = ({ data }) => {
          {
             hasMessages ?
                <ul className="messages" style={{ display: expanded ? 'block' : 'none' }}>
-                  {data.messages.map(message => <li key={createRandomId()}>{message.message}</li>)}
+                  {data.messages.map((message, index) => <li key={index}>{message.message}</li>)}
                </ul> :
                ''
          }

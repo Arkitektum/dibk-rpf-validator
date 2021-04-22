@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
 import ResponseRow from '../ResponseRow/ResponseRow';
-import { createRandomId } from 'utils';
 import './ResponseBlock.scss';
 
 const ResponseBlock = ({ title, list, expandable = true, maxHeight = true }) => {
@@ -19,7 +18,7 @@ const ResponseBlock = ({ title, list, expandable = true, maxHeight = true }) => 
       <div className={`response-block ${expandable ? 'response-block-expandable' : ''} ${!expanded && expandable ? 'response-block-collapsed' : ''}`}>
          <h6  {...(expandable && { onClick: handleClick })}>{title} ({list.length})</h6>
          <div className={`response ${maxHeight ? 'response-max-height' : ''}`}>
-            {list.map(element => <ResponseRow key={createRandomId()} data={element} />)}
+            {list.map((element, index) => <ResponseRow key={index} data={element} />)}
          </div>
       </div>
    );

@@ -1,7 +1,8 @@
 @import "~bootstrap/scss/bootstrap";
-@import "./styles/overrides";
+@import "./styles/_overrides";
 
 html {
+   min-height: 1800px;
    overflow-y: scroll;
 }
 

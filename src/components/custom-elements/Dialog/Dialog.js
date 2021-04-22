@@ -12,7 +12,7 @@ const Dialog = () => {
 
    const onHide = () => {
       dispatch(hideDialog());
-   };
+   }
    
    return (
       <Modal show={show} onHide={onHide} animation={false} centered>

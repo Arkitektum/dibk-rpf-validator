@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { FileInput } from 'components/custom-elements';
 import { RuleSets, ValidationReponse } from 'components/partials';
-import { sendAsync } from 'utils';
+import { sendAsync } from 'utils/api';
 
 const VALIDATE_URL = process.env.REACT_APP_PLANOMRISS_VALIDATE_URL;
 const RULES_URL = process.env.REACT_APP_PLANOMRISS_RULES_URL;
@@ -20,6 +20,7 @@ const ValidatePlanomriss = ({ username }) => {
       }
 
       setIsValidating(true);
+      setApiResponse(null);
 
       const formData = new FormData();
       formData.append('file', planomriss);     

@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { FileInput, SelectDropdown } from 'components/custom-elements';
-import { sendAsync } from 'utils';
+import { sendAsync } from 'utils/api';
 import { saveAs } from 'file-saver';
 import './ConvertPlanbestemmelser.scss';
 
