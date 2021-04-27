@@ -11,15 +11,18 @@ export const sendAsync = async (url, data, username, options = {}) => {
          data,
          headers: {
             'Content-Type': 'multipart/form-data',
-            'system': `Arkitektum demonstrator v/${latinize(username)}`
+            'system': 'Arkitektum demonstrator' + (username ? ` v/${latinize(username)}` : '')
          }
       };
 
       const response = await axios(Object.assign(defaultOptions, options));
-      return response.data;
+
+      return response.data || null;
    } catch (error) {
       const message = (error.response && error.response.data) ? error.response.data : error.message;
-      store.dispatch(showDialog({ title: 'En feil har oppstått', message }));
+      store.dispatch(showDialog({ title: 'En feil har oppstått', body: message }));
+
+      return null;
    }
 }
 

@@ -1,56 +1,43 @@
-import React, { useState } from 'react';
-import Modal from 'react-bootstrap/Modal';
+import React from 'react';
+import ReactDOMServer from "react-dom/server";
+import { useDispatch } from 'react-redux'
 import Button from 'react-bootstrap/Button';
 import InfoIcon from 'assets/gfx/icon-info.svg';
+import { showDialog } from 'store/slices/dialogSlice';
 import { sendAsync } from 'utils/api';
 import './RuleSets.scss';
 
 const RuleSets = ({ apiUrl, username }) => {
-   const [ruleSets, setRuleSets] = useState(null);
-   const [dialogShow, setDialogShow] = useState(false);
-
-   const handleClose = () => setDialogShow(false);
+   const dispatch = useDispatch();
+   let ruleSets = null;
 
    const showRuleSets = async event => {
       event.preventDefault();
       event.stopPropagation();
 
       if (!ruleSets) {
-         await loadRuleSets();
+         ruleSets = await sendAsync(apiUrl, null, username, { method: 'get' });
       }
 
-      setDialogShow(true);
+      openDialog();
    }
 
-   const loadRuleSets = async () => {
-      const data = await sendAsync(apiUrl, null, username, { method: 'get' });
-
-      if (data) {
-         setRuleSets(data);
-      }
-   }
-
-   const renderDialog = () => {
+   const openDialog = () => {
       if (!ruleSets) {
-         return '';
+         return;
       }
 
       const ruleCount = ruleSets.reduce((total, ruleSet) => total + ruleSet.rules.length, 0);
+      const body = ReactDOMServer.renderToStaticMarkup(renderDialogBody());
 
+      dispatch(showDialog({ title: `Valideringsregler (${ruleCount})`, body, className: 'rule-summary-dialog' }));
+   }
+
+   const renderDialogBody = () => {
       return (
-         <Modal show={dialogShow} onHide={handleClose} animation={false} dialogClassName="rule-summary-dialog" centered>
-            <Modal.Header closeButton>
-               <Modal.Title>Valideringsregler ({ruleCount})</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-               <div>
-                  {ruleSets.map((ruleSet, index) => renderSummary(ruleSet, index))}
-               </div>
-            </Modal.Body>
-            <Modal.Footer>
-               <Button variant="primary" onClick={handleClose}>Lukk</Button>
-            </Modal.Footer>
-         </Modal>
+         <div>
+            {ruleSets.map((ruleSet, index) => renderSummary(ruleSet, index))}
+         </div>
       );
    }
 
@@ -82,14 +69,12 @@ const RuleSets = ({ apiUrl, username }) => {
          </div>
       )
    }
-   
+
    return (
       <React.Fragment>
          <Button variant="link" onClick={showRuleSets}>
             <img className="icon-info" src={InfoIcon} alt="Oversikt over valideringsregler" />Oversikt over valideringsregler
          </Button>
-
-         {renderDialog()}
       </React.Fragment>
    );
 }

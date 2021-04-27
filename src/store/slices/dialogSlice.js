@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
    show: false,
    title: null,
-   message: null
+   body: null,
+   className: null
 };
 
 export const dialogSlice = createSlice({
