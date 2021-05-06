@@ -11,7 +11,7 @@ const RULES_URL = process.env.REACT_APP_PLANFORSLAG_RULES_URL;
 const ValidatePlanforslag = ({ username }) => {
    const [oversendelse, setOversendelse] = useState(undefined);
    const [planbestemmelser, setPlanbestemmelser] = useState(undefined);
-   const [plankart2D, setPlankart2D] = useState(undefined);
+   const [plankart2D, setPlankart2D] = useState([]);
    const [plankart3D, setPlankart3D] = useState(undefined);
    const [isValidating, setIsValidating] = useState(false);
    const [apiResponse, setApiResponse] = useState(null);
@@ -34,7 +34,7 @@ const ValidatePlanforslag = ({ username }) => {
    }
    
    const canValidate = () => {
-      return username.trim() !== '' && !(!oversendelse && !planbestemmelser && !plankart2D && !plankart2D);
+      return username.trim() !== '' && !(!oversendelse && !planbestemmelser && !plankart2D.length && !plankart3D);
    }
 
    const getFormData = () => {
@@ -48,8 +48,8 @@ const ValidatePlanforslag = ({ username }) => {
          formData.append('planbestemmelser', planbestemmelser);
       }
 
-      if (plankart2D) {
-         formData.append('plankart2D', plankart2D);
+      if (plankart2D.length) {
+         plankart2D.forEach(plankart => formData.append('plankart2D', plankart));
       }
 
       if (plankart3D) {
@@ -63,7 +63,7 @@ const ValidatePlanforslag = ({ username }) => {
       fileInputs.forEach(fileInput => fileInput.reset());
       setOversendelse(undefined);
       setPlanbestemmelser(undefined);
-      setPlankart2D(undefined);
+      setPlankart2D([]);
       setPlankart3D(undefined);
       setIsValidating(false);
    }
@@ -97,7 +97,7 @@ const ValidatePlanforslag = ({ username }) => {
                   <div className="col">
                      <Form.Group controlId="formUploadPlankart2d">
                         <Form.Label>Plankart 2D (GML)</Form.Label>
-                        <FileInput ref={setFileInputRef} accept=".gml" onChange={files => setPlankart2D(files[0])} />
+                        <FileInput ref={setFileInputRef} accept=".gml" multiple={true} onChange={files => setPlankart2D(files)} />
                      </Form.Group>
                   </div>
                   <div className="col">

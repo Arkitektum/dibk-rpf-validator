@@ -23,7 +23,7 @@ const FileInput = forwardRef(({ onChange, accept, multiple, maxFiles = -1 }, ref
    const handleChange = event => {
       const files = Array.from(event.target.files);
 
-      if (maxFiles !== -1 && files.length > maxFiles) {
+      if (!files.length || (maxFiles !== -1 && files.length > maxFiles)) {
          resetInput();
          onChange([]);
          return;
