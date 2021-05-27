@@ -44,7 +44,7 @@ const RuleSets = ({ apiUrl, username }) => {
    const renderSummary = (ruleSet, index) => {
       return (
          <div className="ruleset" key={index}>
-            <h6>{ruleSet.category} ({ruleSet.rules.length})</h6>
+            <h6>{ruleSet.group} ({ruleSet.rules.length})</h6>
             <div className="rules">
                {ruleSet.rules.map((rule, idx) => renderRule(rule, idx))}
             </div>
