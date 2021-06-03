@@ -3,14 +3,15 @@ import { Provider } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
-import { ConvertPlanbestemmelser, ValidatePlanforslag, ValidatePlanomriss } from 'components/partials';
+import { ConvertPlanbestemmelser, ValidatePlanforslag, ValidatePlanomriss, ValidateVarselPlanoppstart } from 'components/partials';
 import { Dialog } from 'components/custom-elements';
-import store from './store';
+import store from 'store';
+import 'config/map.config';
 import Logo from 'assets/gfx/logo-dibk.svg';
 import './App.scss';
 
 const App = () => {
-   const [username, setUsername] = useState('');
+   const [username, setUsername] = useState('Tor Anders');
 
    return (
       <Provider store={store}>
@@ -26,8 +27,8 @@ const App = () => {
                   <div className="col-3">
                      <Form>
                         <Form.Group controlId="formUsername">
-                           <Form.Label>Brukernavn</Form.Label>
-                           <Form.Control required type="text" onChange={event => setUsername(event.target.value)} />
+                           <Form.Label>Ditt navn</Form.Label>
+                           <Form.Control required type="text" value={username} onChange={event => setUsername(event.target.value)} />
                         </Form.Group>
                      </Form>
                   </div>
@@ -37,6 +38,9 @@ const App = () => {
                   <Tab eventKey="validate-planforslag" title="Validering av reguleringsplanforslag">
                      <ValidatePlanforslag username={username} />
                   </Tab>
+                  <Tab eventKey="validate-varsel-planoppstart" title="Validering av varsel om planoppstart">
+                     <ValidateVarselPlanoppstart username={username} />
+                  </Tab>                  
                   <Tab eventKey="validate-planomriss" title="Validering av planomriss">
                      <ValidatePlanomriss username={username} />
                   </Tab>

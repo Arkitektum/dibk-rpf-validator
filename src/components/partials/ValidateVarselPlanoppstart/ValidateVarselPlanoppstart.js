@@ -3,15 +3,15 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { FileInput } from 'components/custom-elements';
 import { RuleSets } from 'components/partials';
-import { sendAsync } from 'utils/api';
 import Response from 'components/partials/ValidationResponse/Response/Response';
 import { JsonPrint } from 'components/custom-elements';
+import { sendAsync } from 'utils/api';
 
-const VALIDATE_URL = process.env.REACT_APP_PLANOMRISS_VALIDATE_URL;
-const RULES_URL = process.env.REACT_APP_PLANOMRISS_RULES_URL;
+const VALIDATE_URL = process.env.REACT_APP_VARSEL_PLANOPPSTART_VALIDATE_URL;
+const RULES_URL = process.env.REACT_APP_VARSEL_PLANOPPSTART_RULES_URL;
 
-const ValidatePlanomriss = ({ username }) => {
-   const [planomriss, setPlanomriss] = useState(undefined);
+const ValidateVarselPlanoppstart = ({ username }) => {
+   const [varsel, setVarsel] = useState(undefined);
    const [isValidating, setIsValidating] = useState(false);
    const [apiResponse, setApiResponse] = useState(null);
    const fileInput = useRef(null);
@@ -25,7 +25,7 @@ const ValidatePlanomriss = ({ username }) => {
       setApiResponse(null);
 
       const formData = new FormData();
-      formData.append('file', planomriss);     
+      formData.append('file', varsel);     
       const data = await sendAsync(VALIDATE_URL, formData, username);
 
       reset();
@@ -36,12 +36,12 @@ const ValidatePlanomriss = ({ username }) => {
    }
    
    const canValidate = () => {
-      return username.trim() !== '' && planomriss !== undefined;
+      return username.trim() !== '' && varsel !== undefined;
    }
 
    const reset = () => {
       fileInput.current.reset();
-      setPlanomriss(undefined);
+      setVarsel(undefined);
       setIsValidating(false);
    }
 
@@ -51,9 +51,9 @@ const ValidatePlanomriss = ({ username }) => {
             <Form>
                <div className="row">
                   <div className="col-6">
-                     <Form.Group controlId="formUploadPlanomriss">
-                        <Form.Label>Planomriss (GML)</Form.Label>
-                        <FileInput ref={fileInput} accept=".gml" onChange={files => setPlanomriss(files[0])} />
+                     <Form.Group controlId="formUploadVarsel">
+                        <Form.Label>Varsel om planoppstart (XML)</Form.Label>
+                        <FileInput ref={fileInput} accept=".xml" onChange={files => setVarsel(files[0])} />
                      </Form.Group>
                   </div>
                </div>
@@ -97,4 +97,4 @@ const ValidatePlanomriss = ({ username }) => {
    );
 }
 
-export default ValidatePlanomriss
+export default ValidateVarselPlanoppstart

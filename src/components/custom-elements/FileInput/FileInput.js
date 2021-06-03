@@ -5,7 +5,7 @@ const createRandomId = () => Math.random().toString(36).substring(4);
 
 const FileInput = forwardRef(({ onChange, accept, multiple, maxFiles = -1 }, ref) => {
    const defaultPlaceholder = `Ingen ${multiple ? 'filer' : 'fil'} valgt...`;
-   const inputId = createRandomId();      
+   const inputId = createRandomId();
    const [placeholder, setPlaceholder] = useState(defaultPlaceholder);
    const fileInput = useRef(null);
 

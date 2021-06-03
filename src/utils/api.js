@@ -19,7 +19,7 @@ export const sendAsync = async (url, data, username, options = {}) => {
 
       return response.data || null;
    } catch (error) {
-      const message = (error.response && error.response.data) ? error.response.data : error.message;
+      const message = (error.response && error.response.data) ? error.response.data.title : error.message;
       store.dispatch(showDialog({ title: 'En feil har oppstått', body: message }));
 
       return null;

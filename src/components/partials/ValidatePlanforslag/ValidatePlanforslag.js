@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { FileInput } from 'components/custom-elements';
-import { RuleSets, ValidationReponse } from 'components/partials';
+import { RuleSets } from 'components/partials';
+import Response from 'components/partials/ValidationResponse/Response/Response';
+import { JsonPrint } from 'components/custom-elements';
+import GmlMap from 'components/partials/GmlMap/GmlMap';
 import { sendAsync } from 'utils/api';
+import config from 'config/map.plankart.config';
+import { getValidGmlDocuments } from 'utils/helpers';
 
 const VALIDATE_URL = process.env.REACT_APP_PLANFORSLAG_VALIDATE_URL;
 const RULES_URL = process.env.REACT_APP_PLANFORSLAG_RULES_URL;
@@ -15,6 +20,7 @@ const ValidatePlanforslag = ({ username }) => {
    const [plankart3D, setPlankart3D] = useState(undefined);
    const [isValidating, setIsValidating] = useState(false);
    const [apiResponse, setApiResponse] = useState(null);
+   const [gmlDocuments, setGmlDocuments] = useState([]);
    const fileInputs = [];
 
    const validate = async () => {
@@ -24,15 +30,18 @@ const ValidatePlanforslag = ({ username }) => {
 
       setIsValidating(true);
       setApiResponse(null);
-      
-      const data = await sendAsync(VALIDATE_URL, getFormData(), username);
-      reset();
 
-      if (data) {
-         setApiResponse(data);
+      const result = await sendAsync(VALIDATE_URL, getFormData(), username);
+
+      if (result) {
+         const gmlDocs = await getValidGmlDocuments(plankart2D, result, config.validationRuleIds);
+         setGmlDocuments(gmlDocs);
+         setApiResponse(result);
       }
+
+      reset();
    }
-   
+
    const canValidate = () => {
       return username.trim() !== '' && !(!oversendelse && !planbestemmelser && !plankart2D.length && !plankart3D);
    }
@@ -59,7 +68,7 @@ const ValidatePlanforslag = ({ username }) => {
       return formData;
    }
 
-   const reset = () => {     
+   const reset = () => {
       fileInputs.forEach(fileInput => fileInput.reset());
       setOversendelse(undefined);
       setPlanbestemmelser(undefined);
@@ -128,7 +137,27 @@ const ValidatePlanforslag = ({ username }) => {
             </Form>
          </div>
 
-         <ValidationReponse apiResponse={apiResponse} />
+         {
+            apiResponse && gmlDocuments.length ?
+               <div className="response">
+                  <div className="paper">
+                     <h4>Resultat</h4>
+                     <Response data={apiResponse} />
+                  </div>
+
+                  <div className="paper">
+                     <h4>Kart</h4>
+                     <GmlMap gmlDocuments={gmlDocuments} config={config} />
+                  </div>
+
+                  <div className="paper">
+                     <h4>Svar fra API</h4>
+                     <JsonPrint data={apiResponse} />
+                  </div>
+               </div> :
+               ''
+         }
+
       </React.Fragment>
    );
 }
