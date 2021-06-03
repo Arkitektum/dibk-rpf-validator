@@ -11,7 +11,7 @@ import Logo from 'assets/gfx/logo-dibk.svg';
 import './App.scss';
 
 const App = () => {
-   const [username, setUsername] = useState('Tor Anders');
+   const [username, setUsername] = useState('');
 
    return (
       <Provider store={store}>
