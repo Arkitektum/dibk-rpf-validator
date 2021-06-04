@@ -30,6 +30,7 @@ const ValidatePlanforslag = ({ username }) => {
 
       setIsValidating(true);
       setApiResponse(null);
+      setGmlDocuments([]);
 
       const result = await sendAsync(VALIDATE_URL, getFormData(), username);
 
@@ -138,26 +139,29 @@ const ValidatePlanforslag = ({ username }) => {
          </div>
 
          {
-            apiResponse && gmlDocuments.length ?
-               <div className="response">
-                  <div className="paper">
-                     <h4>Resultat</h4>
-                     <Response data={apiResponse} />
-                  </div>
-
-                  <div className="paper">
-                     <h4>Kart</h4>
-                     <GmlMap gmlDocuments={gmlDocuments} config={config} />
-                  </div>
-
-                  <div className="paper">
-                     <h4>Svar fra API</h4>
-                     <JsonPrint data={apiResponse} />
-                  </div>
+            apiResponse ?
+               <div className="paper">
+                  <h4>Resultat</h4>
+                  <Response data={apiResponse} />
                </div> :
                ''
          }
-
+         {
+            gmlDocuments.length ?
+               <div className="paper">
+                  <h4>Kart</h4>
+                  <GmlMap gmlDocuments={gmlDocuments} config={config} />
+               </div> :
+               ''
+         }
+         {
+            apiResponse ?
+               <div className="paper">
+                  <h4>Svar fra API</h4>
+                  <JsonPrint data={apiResponse} />
+               </div> :
+               ''
+         }
       </React.Fragment>
    );
 }

@@ -35,6 +35,10 @@ h6 {
    border: 1px solid #dee2e6;
    padding: 24px 28px;
    margin: 0 0 40px 0;
+
+   &:last-child {
+      margin-bottom: 800px;
+   }
 }
 
 .tab-content > .tab-pane > .paper {
