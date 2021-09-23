@@ -3,10 +3,10 @@ import './ResponseRow.scss';
 
 const getStatus = (status) => status === 'NOT_EXECUTED' ? 'skipped' : status.toLowerCase();
 
-const ResponseRow = ({ data }) => {
+function ResponseRow({ data }) {
    const [expanded, setExpanded] = useState(false);
 
-   const handleClick = (event) => {
+   function handleClick(event) {
       if (event.target.nodeName !== "A") {
          setExpanded(!expanded);
       }
@@ -45,4 +45,4 @@ const ResponseRow = ({ data }) => {
    );
 };
 
-export default ResponseRow
+export default ResponseRow;

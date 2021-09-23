@@ -3,10 +3,10 @@ import { useState } from 'react';
 import ResponseRow from '../ResponseRow/ResponseRow';
 import './ResponseBlock.scss';
 
-const ResponseBlock = ({ title, list, expandable = true, maxHeight = true }) => {
+function ResponseBlock({ title, list, expandable = true, maxHeight = true }) {
    const [expanded, setExpanded] = useState(false);
 
-   const handleClick = () => {
+   function handleClick() {
       setExpanded(!expanded);
    }
 
@@ -24,4 +24,4 @@ const ResponseBlock = ({ title, list, expandable = true, maxHeight = true }) => 
    );
 };
 
-export default ResponseBlock
+export default ResponseBlock;

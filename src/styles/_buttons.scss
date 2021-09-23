@@ -1,0 +1,11 @@
+button.close {
+   background: url('../assets/gfx/icon-close.svg');
+   width: 14px;
+   height: 14px;
+   border: 0 none;
+   background-size: 14px;
+
+   > * {
+      display: none;
+   }
+}

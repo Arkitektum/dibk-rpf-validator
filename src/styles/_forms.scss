@@ -53,3 +53,11 @@
       background-color: #ccc;
    }
 }
+
+label.required::after {
+   content: "*";
+   color: #d9534f;
+   margin-left: 3px;
+   font-size: 18px;
+   line-height: 14px;
+}

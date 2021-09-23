@@ -1,10 +1,12 @@
 import React, { useState, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { FileInput, SelectDropdown } from 'components/custom-elements';
 import { sendAsync } from 'utils/api';
 import { saveAs } from 'file-saver';
 import './ConvertPlanbestemmelser.scss';
+import { Spinner } from 'react-bootstrap';
 
 const CONVERT_URL = process.env.REACT_APP_PLANBESTEMMELSER_CONVERT_URL;
 
@@ -15,19 +17,18 @@ const outputOptions = [
 
 let selectedOption = outputOptions[0];
 
-const ConvertPlanbestemmelser = ({ username }) => {
-   const [planbestemmelser, setPlanbestemmelser] = useState(undefined);
-   const [isConverting, setIsConverting] = useState(false);
+function ConvertPlanbestemmelser({ username }) {
+   const [uploadFiles, setUploadFiles] = useState([]);
+   const apiLoading = useSelector(state => state.api.loading);
    const fileInput = useRef(null);
-   
-   const convert = async () => {
+
+   async function convert() {
       if (!canConvert()) {
          return;
       }
 
-      setIsConverting(true);
       const formData = new FormData();
-      formData.append('file', planbestemmelser);
+      uploadFiles.forEach(uploadFile => formData.append(uploadFile.name, uploadFile.file));
 
       if (selectedOption.label === 'HTML') {
          convertToHtml(formData);
@@ -36,84 +37,79 @@ const ConvertPlanbestemmelser = ({ username }) => {
       }
    }
 
-   const convertToHtml = async formData => {
-      const data = await sendAsync(selectedOption.value, formData, username);
+   async function convertToHtml(formData) {
+      const response = await sendAsync(selectedOption.value, formData, username);
       reset();
 
-      if (!data) {
+      if (!response) {
          return;
       }
 
       var tab = window.open('about:blank');
       tab.document.open();
-      tab.document.write(data);
+      tab.document.write(response);
       tab.document.close();
    }
 
-   const convertToPdf = async formData => {
+   async function convertToPdf(formData) {
       const fileName = formData.get('file').name;
-      const data = await sendAsync(selectedOption.value, formData, username, { responseType: 'blob' });
+      const response = await sendAsync(selectedOption.value, formData, username, { responseType: 'blob' });
       reset();
 
-      if (!data) {
+      if (!response) {
          return;
       }
 
       const pdfFileName = fileName.replace(/\.[^/.]+$/, '');
-      saveAs(data, `${pdfFileName}.pdf`);
+      saveAs(response, `${pdfFileName}.pdf`);
    }
 
-   const canConvert = () => {
-      return username.trim() !== '' && planbestemmelser !== undefined;
+   function canConvert() {
+      return username.trim() !== '' && uploadFiles.length > 0;
    }
 
-   const reset = () => {
+   function reset() {
       fileInput.current.reset();
-      setPlanbestemmelser(undefined);
-      setIsConverting(false);
+      setUploadFiles([]);
    }
 
-   const handleOutputSelect = option => {
+   function handleOutputSelect(option) {
       selectedOption = option;
    }
 
    return (
       <div className="paper">
-         <Form>
-            <div className="row">
-               <div className="col">
-                  <Form.Group controlId="formUploadPlanbestemmelser">
-                     <Form.Label>Planbestemmelser (XML)</Form.Label>
-                     <FileInput ref={fileInput} accept=".xml" onChange={files => setPlanbestemmelser(files[0])} />
-                  </Form.Group>
-               </div>
-               <div className="col">
-                  <Form.Group controlId="formSelectOutput">
-                     <Form.Label>Utdata</Form.Label>
-                     <SelectDropdown name="output" className="selectDropdown" options={outputOptions} value={outputOptions[0]} onSelect={handleOutputSelect} />
-                  </Form.Group>
-               </div>
+         <div className="row">
+            <div className="col">
+               <Form.Group controlId="formUploadPlanbestemmelser">
+                  <Form.Label>Planbestemmelser (XML)</Form.Label>
+                  <FileInput name="file" accept=".xml" fileList={uploadFiles} onChange={setUploadFiles} ref={fileInput} />
+               </Form.Group>
             </div>
+            <div className="col">
+               <Form.Group controlId="formSelectOutput">
+                  <Form.Label>Utdata</Form.Label>
+                  <SelectDropdown name="output" className="selectDropdown" options={outputOptions} value={outputOptions[0]} onSelect={handleOutputSelect} />
+               </Form.Group>
+            </div>
+         </div>
 
-            <div className="row mt-2 mb-3">
-               <div className="col">
-                  <div className="form-footer">
-                     <div>
-                        <Button onClick={convert} disabled={!canConvert() || isConverting}>Konvertér</Button>
-                        {
-                           isConverting ?
-                              <div className="spinner-border" role="status">
-                                 <span className="sr-only">Laster...</span>
-                              </div> :
-                              ''
-                        }
-                     </div>
+         <div className="row mt-2 mb-3">
+            <div className="col">
+               <div className="form-footer">
+                  <div>
+                     <Button onClick={convert} disabled={!canConvert() || apiLoading}>Konvertér</Button>
+                     {
+                        apiLoading ?
+                           <Spinner animation="border" /> :
+                           ''
+                     }
                   </div>
                </div>
             </div>
-         </Form>
+         </div>
       </div>
    );
 }
 
-export default ConvertPlanbestemmelser
+export default ConvertPlanbestemmelser;

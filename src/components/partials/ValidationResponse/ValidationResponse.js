@@ -3,7 +3,7 @@ import { JsonPrint } from 'components/custom-elements';
 import GmlMap from 'components/partials/GmlMap/GmlMap';
 
 
-const ValidationReponse = ({ apiResponse, gmlDocuments, mapConfig }) => {
+function ValidationReponse({ apiResponse, gmlDocuments, mapConfig }) {
    if (!apiResponse || !gmlDocuments.length) {
       return '';
    }

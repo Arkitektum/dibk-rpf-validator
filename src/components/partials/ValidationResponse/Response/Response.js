@@ -2,14 +2,14 @@ import React from 'react';
 import ResponseBlock from '../ResponseBlock/ResponseBlock';
 import './Response.scss';
 
-const Response = ({ data }) => {
+function Response({ data }) {
    if (!data) {
       return '';
    }
 
-   const rulesWithMessages = data.validationRules.filter(rule => rule.messages.length > 0);
-   const passedRules = data.validationRules.filter(rule => rule.status === 'PASSED');
-   const skippedRules = data.validationRules.filter(rule => rule.status === 'NOT_EXECUTED');
+   const rulesWithMessages = data.rules.filter(rule => rule.messages.length > 0);
+   const passedRules = data.rules.filter(rule => rule.status === 'PASSED');
+   const skippedRules = data.rules.filter(rule => rule.status === 'NOT_EXECUTED');
    const rulesCheckedCount = rulesWithMessages.length + passedRules.length;
    const timeUsed = data.timeUsed.toString().replace('.', ',');
 
@@ -34,7 +34,7 @@ const Response = ({ data }) => {
             </div>
             <div className="row">
                <div className="col-3">Antall regler totalt:</div>
-               <div className="col-9">{data.validationRules.length}</div>
+               <div className="col-9">{data.rules.length}</div>
             </div>
             <div className="row">
                <div className="col-3">Tidsbruk:</div>
@@ -49,4 +49,4 @@ const Response = ({ data }) => {
    );
 }
 
-export default Response
+export default Response;

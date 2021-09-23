@@ -7,10 +7,10 @@ import Response from 'components/partials/ValidationResponse/Response/Response';
 import { JsonPrint } from 'components/custom-elements';
 import { sendAsync } from 'utils/api';
 
-const VALIDATE_URL = process.env.REACT_APP_VARSEL_PLANOPPSTART_VALIDATE_URL;
-const RULES_URL = process.env.REACT_APP_VARSEL_PLANOPPSTART_RULES_URL;
+const VALIDATE_URL = process.env.REACT_APP_PLANGRENSE_VALIDATE_URL;
+const RULES_URL = process.env.REACT_APP_PLANGRENSE_RULES_URL;
 
-function ValidateVarselPlanoppstart({ username }) {
+function ValidatePlangrense({ username }) {
    const [uploadFiles, setUploadFiles] = useState([]);
    const [apiResponse, setApiResponse] = useState(null);
    const apiLoading = useSelector(state => state.api.loading);
@@ -26,22 +26,22 @@ function ValidateVarselPlanoppstart({ username }) {
       const formData = new FormData();
       uploadFiles.forEach(uploadFile => formData.append(uploadFile.name, uploadFile.file));
 
-      const result = await sendAsync(VALIDATE_URL, formData, username);
+      const response = await sendAsync(VALIDATE_URL, formData, username);
 
-      if (result) {
-         setApiResponse(result);
+      if (response) {
+         setApiResponse(response);
       }
 
       reset();
    }
 
    function canValidate() {
-      return username.trim() !== '' && uploadFiles.length > 0;
+      return username.trim() !== '' && uploadFiles.length > 0
    }
 
    function reset() {
-     fileInput.current.reset();
-     setUploadFiles([]);
+      fileInput.current.reset();
+      setUploadFiles([]);
    }
 
    return (
@@ -49,9 +49,9 @@ function ValidateVarselPlanoppstart({ username }) {
          <div className="paper">
             <div className="row">
                <div className="col-6">
-                  <Form.Group controlId="formUploadVarsel">
-                     <Form.Label>Varsel om planoppstart (XML)</Form.Label>
-                     <FileInput name="file" accept=".xml" fileList={uploadFiles} onChange={setUploadFiles} ref={fileInput} />
+                  <Form.Group controlId="formUploadPlangrense">
+                     <Form.Label>Plangrense (GML)</Form.Label>
+                     <FileInput name="file" accept=".gml" fileList={uploadFiles} onChange={setUploadFiles} ref={fileInput} />
                   </Form.Group>
                </div>
             </div>
@@ -92,4 +92,4 @@ function ValidateVarselPlanoppstart({ username }) {
    );
 }
 
-export default ValidateVarselPlanoppstart;
+export default ValidatePlangrense;

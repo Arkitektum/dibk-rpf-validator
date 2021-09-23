@@ -5,56 +5,58 @@ import Button from 'react-bootstrap/Button';
 import InfoIcon from 'assets/gfx/icon-info.svg';
 import { showDialog } from 'store/slices/dialogSlice';
 import { sendAsync } from 'utils/api';
-import './RuleSets.scss';
+import './RuleInfo.scss';
 
-const RuleSets = ({ apiUrl, username }) => {
+function RuleInfo({ apiUrl, username }) {  
    const dispatch = useDispatch();
-   let ruleSets = null;
+   let ruleInfo = null;
 
-   const showRuleSets = async event => {
+   async function showRuleInfo(event) {
       event.preventDefault();
       event.stopPropagation();
 
-      if (!ruleSets) {
-         ruleSets = await sendAsync(apiUrl, null, username, { method: 'get' });
+      if (!ruleInfo) {
+         const response = await sendAsync(apiUrl, null, username, { method: 'get' });
+         
+         if (response === null) {
+            return;
+         }
+
+         ruleInfo = response;
       }
 
-      openDialog();
+      openDialog();	  
    }
 
-   const openDialog = () => {
-      if (!ruleSets) {
-         return;
-      }
-
-      const ruleCount = ruleSets.reduce((total, ruleSet) => total + ruleSet.rules.length, 0);
+   function openDialog() {
+      const ruleCount = ruleInfo.reduce((total, group) => total + group.rules.length, 0);
       const body = ReactDOMServer.renderToStaticMarkup(renderDialogBody());
 
       dispatch(showDialog({ title: `Valideringsregler (${ruleCount})`, body, className: 'rule-summary-dialog' }));
    }
 
-   const renderDialogBody = () => {
+   function renderDialogBody() {
       return (
          <div>
-            {ruleSets.map((ruleSet, index) => renderSummary(ruleSet, index))}
+            {ruleInfo.map((group, index) => renderSummary(group, index))}
          </div>
       );
    }
 
-   const renderSummary = (ruleSet, index) => {
+   function renderSummary(group, index) {
       return (
-         <div className="ruleset" key={index}>
-            <h6>{ruleSet.group} ({ruleSet.rules.length})</h6>
+         <div className="ruleset" key={'ruleset-' + index}>
+            <h6>{group.name} ({group.rules.length})</h6>
             <div className="rules">
-               {ruleSet.rules.map((rule, idx) => renderRule(rule, idx))}
+               {group.rules.map((rule, idx) => renderRule(rule, idx))}
             </div>
          </div>
       );
    }
 
-   const renderRule = (rule, index) => {
+   function renderRule(rule, index) {
       return (
-         <div key={index} className="rule">
+         <div key={'rule-' + index} className="rule">
             <div className="type">
                <span className={`label label-${rule.messageType.toLowerCase()}`}>{rule.messageType}</span>
             </div>
@@ -72,11 +74,11 @@ const RuleSets = ({ apiUrl, username }) => {
 
    return (
       <React.Fragment>
-         <Button variant="link" onClick={showRuleSets}>
+         <Button variant="link" onClick={showRuleInfo}>
             <img className="icon-info" src={InfoIcon} alt="Oversikt over valideringsregler" />Oversikt over valideringsregler
          </Button>
       </React.Fragment>
    );
 }
 
-export default RuleSets;
+export default RuleInfo;

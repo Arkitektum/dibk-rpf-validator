@@ -1,6 +1,8 @@
 @import "~bootstrap/scss/bootstrap";
 @import "./styles/forms";
-@import "./styles/_overrides";
+@import "./styles/buttons";
+@import "./styles/dialogs";
+@import "./styles/overrides";
 
 html {
    min-height: 1800px;
@@ -17,10 +19,4 @@ body {
    background-repeat: no-repeat;
    background-attachment: fixed;
    font-size: 14px;
-}
-
-h4 {
-   border-bottom: 1px solid #dddddd;
-   padding-bottom: 10px;
-   margin-bottom: 20px;
 }
