@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import 'ol/ol.css';
+//import 'ol/ol.css';
 import App from './App';
 
 window.onbeforeunload = () => {

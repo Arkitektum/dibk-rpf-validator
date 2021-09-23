@@ -6,7 +6,7 @@ import Tab from 'react-bootstrap/Tab';
 import { ConvertPlanbestemmelser, SubmitVarselPlanoppstart, ValidatePlanforslag, ValidatePlangrense, ValidateVarselPlanoppstart } from 'components/partials';
 import { Dialog } from 'components/custom-elements';
 import store from 'store';
-import 'config/map.config';
+//import 'config/map.config';
 import Logo from 'assets/gfx/logo-dibk.svg';
 import './App.scss';
 

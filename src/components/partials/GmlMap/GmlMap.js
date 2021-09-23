@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+/*import React, { useState, useEffect } from 'react';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import { Vector as VectorSource } from 'ol/source';
@@ -168,4 +168,4 @@ const GmlMap = ({ gmlDocuments, config }) => {
    );
 };
 
-export default GmlMap
+export default GmlMap*/
