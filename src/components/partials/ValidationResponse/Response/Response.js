@@ -7,9 +7,10 @@ function Response({ data }) {
       return '';
    }
 
-   const rulesWithMessages = data.rules.filter(rule => rule.messages.length > 0);
-   const passedRules = data.rules.filter(rule => rule.status === 'PASSED');
-   const skippedRules = data.rules.filter(rule => rule.status === 'NOT_EXECUTED');
+   const rules = data.rules || data.validationRules;
+   const rulesWithMessages = rules.filter(rule => rule.messages.length > 0);
+   const passedRules = rules.filter(rule => rule.status === 'PASSED');
+   const skippedRules = rules.filter(rule => rule.status === 'NOT_EXECUTED');
    const rulesCheckedCount = rulesWithMessages.length + passedRules.length;
    const timeUsed = data.timeUsed.toString().replace('.', ',');
 
@@ -34,7 +35,7 @@ function Response({ data }) {
             </div>
             <div className="row">
                <div className="col-3">Antall regler totalt:</div>
-               <div className="col-9">{data.rules.length}</div>
+               <div className="col-9">{rules.length}</div>
             </div>
             <div className="row">
                <div className="col-3">Tidsbruk:</div>
