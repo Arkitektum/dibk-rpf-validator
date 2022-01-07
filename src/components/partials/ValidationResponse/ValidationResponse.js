@@ -1,9 +1,8 @@
 import Response from './Response/Response';
 import { JsonPrint } from 'components/custom-elements';
-import GmlMap from 'components/partials/GmlMap/GmlMap';
 
 
-function ValidationReponse({ apiResponse, gmlDocuments, mapConfig }) {
+function ValidationReponse({ apiResponse, gmlDocuments }) {
    if (!apiResponse || !gmlDocuments.length) {
       return '';
    }
@@ -13,11 +12,6 @@ function ValidationReponse({ apiResponse, gmlDocuments, mapConfig }) {
          <div className="paper">
             <h4>Resultat</h4>
             <Response data={apiResponse} />
-         </div>
-
-         <div className="paper">
-            <h4>Kart</h4>
-            <GmlMap gmlDocuments={gmlDocuments} config={mapConfig} />
          </div>
 
          <div className="paper">

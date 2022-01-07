@@ -59,8 +59,8 @@ function SubmitVarselPlanoppstart({ username }) {
                </div>
                <div className="col">
                   <Form.Group controlId="formUploadPlangrenseGml">
-                     <Form.Label>Plangrense (GML)</Form.Label>
-                     <FileInput name="plangrense" accept=".gml" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
+                     <Form.Label>Planområde (GML)</Form.Label>
+                     <FileInput name="planomraade" accept=".gml" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                   </Form.Group>
                </div>
             </div>
@@ -68,8 +68,8 @@ function SubmitVarselPlanoppstart({ username }) {
             <div className="row">
                <div className="col">
                   <Form.Group controlId="formUploadPlangrensePdf">
-                     <Form.Label>Plangrense (PDF)</Form.Label>
-                     <FileInput name="plangrensePdf" accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
+                     <Form.Label>Planområde (PDF)</Form.Label>
+                     <FileInput name="planomraadePdf" accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                   </Form.Group>
                </div>
                <div className="col">

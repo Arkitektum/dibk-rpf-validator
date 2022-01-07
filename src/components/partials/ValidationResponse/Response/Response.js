@@ -10,7 +10,7 @@ function Response({ data }) {
    const rules = data.rules || data.validationRules;
    const rulesWithMessages = rules.filter(rule => rule.messages.length > 0);
    const passedRules = rules.filter(rule => rule.status === 'PASSED');
-   const skippedRules = rules.filter(rule => rule.status === 'NOT_EXECUTED');
+   const skippedRules = rules.filter(rule => rule.status === 'SKIPPED');
    const rulesCheckedCount = rulesWithMessages.length + passedRules.length;
    const timeUsed = data.timeUsed.toString().replace('.', ',');
 

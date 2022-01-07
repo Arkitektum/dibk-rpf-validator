@@ -6,9 +6,6 @@ import { RuleInfo } from 'components/partials';
 import Response from 'components/partials/ValidationResponse/Response/Response';
 import { JsonPrint } from 'components/custom-elements';
 import { sendAsync } from 'utils/api';
-/*import GmlMap from 'components/partials/GmlMap/GmlMap';
-import { getValidGmlDocuments } from 'utils/helpers';
-import config from 'config/map.plankart.config';*/
 
 const VALIDATE_URL = process.env.REACT_APP_PLANFORSLAG_VALIDATE_URL;
 const RULES_URL = process.env.REACT_APP_PLANFORSLAG_RULES_URL;
@@ -16,7 +13,6 @@ const RULES_URL = process.env.REACT_APP_PLANFORSLAG_RULES_URL;
 function ValidatePlanforslag({ username }) {
    const [uploadFiles, setUploadFiles] = useState([]);
    const [apiResponse, setApiResponse] = useState(null);
-   //const [gmlDocuments, setGmlDocuments] = useState([]);
    const apiLoading = useSelector(state => state.api.loading);
    const fileInputs = [];
 
@@ -26,7 +22,6 @@ function ValidatePlanforslag({ username }) {
       }
 
       setApiResponse(null);
-      //setGmlDocuments([]);
 
       const formData = new FormData();
       uploadFiles.forEach(uploadFile => formData.append(uploadFile.name, uploadFile.file));
@@ -34,9 +29,6 @@ function ValidatePlanforslag({ username }) {
       const response = await sendAsync(VALIDATE_URL, formData, username);
 
       if (response) {
-         /*const plankart2d = uploadFiles.filter(uploadFile => uploadFile.name === 'plankart2d');
-         const gmlDocs = await getValidGmlDocuments(plankart2d, response, config.validationRuleIds);
-         setGmlDocuments(gmlDocs);*/
          setApiResponse(response);
       }
 
@@ -115,14 +107,6 @@ function ValidatePlanforslag({ username }) {
                   <Response data={apiResponse} />
                </div> :
                ''
-         }
-         {
-            /*gmlDocuments.length ?
-               <div className="paper">
-                  <h4>Kart</h4>
-                  <GmlMap gmlDocuments={gmlDocuments} config={config} />
-               </div> :
-               ''*/
          }
          {
             apiResponse ?
