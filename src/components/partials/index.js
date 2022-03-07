@@ -1,3 +1,4 @@
+export { default as Gml2Sosi } from './Gml2Sosi/Gml2Sosi';
 export { default as RuleInfo } from './RuleInfo/RuleInfo';
 export { default as SubmitVarselPlanoppstart } from './SubmitVarselPlanoppstart/SubmitVarselPlanoppstart';
 export { default as ValidatePlanforslag } from './ValidatePlanforslag/ValidatePlanforslag';

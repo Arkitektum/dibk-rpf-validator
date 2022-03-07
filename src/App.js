@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
-import { ConvertPlanbestemmelser, SubmitVarselPlanoppstart, ValidatePlanforslag, ValidatePlangrense, ValidateVarselPlanoppstart } from 'components/partials';
+import { ConvertPlanbestemmelser, Gml2Sosi, SubmitVarselPlanoppstart, ValidatePlanforslag, ValidatePlangrense, ValidateVarselPlanoppstart } from 'components/partials';
 import { Dialog } from 'components/custom-elements';
 import store from 'store';
 //import 'config/map.config';
@@ -19,7 +19,11 @@ const App = () => {
             <div className="container">
                <header>
                   <h1>
-                     <img src={Logo} alt="DiBK" />Fellestjenester PLAN |<span>Demonstrator</span>
+                     <img src={Logo} alt="DiBK" />
+                     <div>
+                        <span>Demonstrator</span>
+                        <span>Fellestjenester PLAN</span>
+                     </div>
                   </h1>
                </header>
 
@@ -39,12 +43,15 @@ const App = () => {
                      </Tab>
                      <Tab eventKey="validate-plangrense" title="Validering av plangrense">
                         <ValidatePlangrense username={username} />
-                     </Tab>                     
+                     </Tab>
                      <Tab eventKey="validate-planforslag" title="Validering av reguleringsplanforslag">
                         <ValidatePlanforslag username={username} />
                      </Tab>
                      <Tab eventKey="convert-planbestemmelser" title="Konvertering av planbestemmelser">
                         <ConvertPlanbestemmelser username={username} />
+                     </Tab>
+                     <Tab eventKey="gml2sosi" title="Konvertering av GML til SOSI">
+                        <Gml2Sosi />
                      </Tab>
                   </Tabs>
                </div>
