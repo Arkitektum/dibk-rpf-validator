@@ -59,8 +59,8 @@ function SubmitVarselPlanoppstart({ username }) {
                </div>
                <div className="col">
                   <Form.Group controlId="formUploadPlangrenseGml">
-                     <Form.Label>Planområde (GML)</Form.Label>
-                     <FileInput name="planomraade" accept=".gml" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
+                     <Form.Label>Planområde (GML/SOSI)</Form.Label>
+                     <FileInput name="planomraade" accept=".gml, .sos, .sosi" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                   </Form.Group>
                </div>
             </div>
