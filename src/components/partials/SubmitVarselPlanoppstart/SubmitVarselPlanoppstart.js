@@ -59,50 +59,59 @@ function SubmitVarselPlanoppstart({ username }) {
                </div>
                <div className="col">
                   <Form.Group controlId="formUploadPlangrenseGml">
-                     <Form.Label>Planområde (GML/SOSI)</Form.Label>
-                     <FileInput name="planomraade" accept=".gml, .sos, .sosi" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
+                     <Form.Label>Planområde (GML)</Form.Label>
+                     <FileInput name="planomraade" accept=".gml" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                   </Form.Group>
                </div>
             </div>
 
             <div className="row">
+               <div className="col">
+                  <Form.Group controlId="formUploadPlangrenseSosi">
+                     <Form.Label>Planområde (SOSI)</Form.Label>
+                     <FileInput name="planomraadeSosi" accept=".sos, .sosi" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
+                  </Form.Group>
+               </div>
                <div className="col">
                   <Form.Group controlId="formUploadPlangrensePdf">
                      <Form.Label>Planområde (PDF)</Form.Label>
                      <FileInput name="planomraadePdf" accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                   </Form.Group>
                </div>
+            </div>
+
+            <div className="row">
                <div className="col">
                   <Form.Group controlId="formUploadKartDetaljert">
                      <Form.Label>Detaljert kart (PDF)</Form.Label>
                      <FileInput name="kartDetaljert" accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                   </Form.Group>
                </div>
-            </div>
-
-            <div className="row">
                <div className="col">
                   <Form.Group controlId="formUploadPlaninitiativ">
                      <Form.Label>Planinitiativ (PDF)</Form.Label>
                      <FileInput name="planinitiativ" accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                   </Form.Group>
                </div>
+            </div>
+
+            <div className="row">
                <div className="col">
                   <Form.Group controlId="formUploadPlanprogram">
                      <Form.Label>Planprogram (PDF)</Form.Label>
                      <FileInput name="planprogram" accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                   </Form.Group>
                </div>
-            </div>
-
-            <div className="row">
                <div className="col">
                   <Form.Group controlId="formUploadReferatOppstartsmøte">
                      <Form.Label>Referat fra oppstartsmøte (PDF)</Form.Label>
                      <FileInput name="referatOppstartsmoete" accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                   </Form.Group>
                </div>
-               <div className="col">
+            </div>
+
+            <div className="row">
+               <div className="col-6">
                   <Form.Group controlId="formUploadAnnet">
                      <Form.Label>Annet (PDF)</Form.Label>
                      <FileInput name="annet" accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
@@ -114,7 +123,7 @@ function SubmitVarselPlanoppstart({ username }) {
                <div className="col">
                   Felter markert med en rød stjerne (<span className="required">*</span>) er obligatoriske
                </div>
-            </div>            
+            </div>
 
             <div className="row mt-2 mb-3">
                <div className="col">
