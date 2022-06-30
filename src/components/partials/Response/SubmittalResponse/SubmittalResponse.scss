@@ -1,0 +1,25 @@
+.error-container {
+   display: flex;
+   flex-grow: 1;
+   flex-direction: column;
+
+   .errors {
+      flex-grow: 1;
+      height: 0;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      flex-direction: column;
+      border: 1px solid #dee2e6;
+   }
+}
+
+.response-text {
+   display: flex;
+   line-height: 24px;
+   font-weight: 500;
+
+   .icon {
+      width: 24px;
+      margin-right: 6px;
+   }
+}

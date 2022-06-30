@@ -1,0 +1,80 @@
+.summary {
+   margin-bottom: 25px;
+   line-height: 22px;
+}
+
+.response-container {
+   border-top: 1px solid #dee2e6;
+   padding-top: 15px;
+   margin-top: 15px;
+   display: flex;
+   flex-direction: column;
+   flex-grow: 1;
+
+   .tab-content {
+      flex-grow: 1;
+      height: 0;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      background-color: #fff;
+      border-left: 1px solid #dee2e6;
+      border-right: 1px solid #dee2e6;
+      border-bottom: 1px solid #dee2e6;
+   }
+
+   .passed::before {
+      background-image: url("../../../../assets/gfx/icon-passed.svg");
+   }
+
+   .failed::before {
+      background-image: url("../../../../assets/gfx/icon-failed.svg");
+   }
+
+   .passed,
+   .failed {
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+
+      &::before {
+         content: "";
+         background-repeat: no-repeat;
+         background-position: center left;
+         background-size: 21px;
+         width: 21px;
+         height: 21px;
+         margin-right: 5px;
+      }
+   }
+}
+
+.label {
+   color: #fff;
+   padding: 2px 6px;
+   border-radius: 4px;
+   font-weight: 500;
+   font-size: 12px;
+   text-transform: uppercase;
+
+   &.label-passed {
+      background-color: #58a058;
+   }
+
+   &.label-warning {
+      background-color: #f0ad4e;
+   }
+
+   &.label-error,
+   &.label-failed {
+      background-color: #d9534f;
+   }
+
+   &.label-skipped {
+      background-color: #c3c3c3;
+   }
+
+   &.label-default {
+      background-color: #00676f;
+      text-transform: lowercase;
+   }
+}

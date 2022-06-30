@@ -1,12 +1,9 @@
 import { useState } from 'react';
 import { Provider } from 'react-redux';
-import Form from 'react-bootstrap/Form';
-import Tabs from 'react-bootstrap/Tabs';
-import Tab from 'react-bootstrap/Tab';
-import { ConvertPlanbestemmelser, Gml2Sosi, SubmitVarselPlanoppstart, ValidatePlanforslag, ValidatePlangrense, ValidateVarselPlanoppstart } from 'components/partials';
+import { Form, Tab, Tabs } from 'react-bootstrap';
+import { VarselOmPlanoppstart, HøringOgOffentligEttersyn, Reguleringsplanforslag, Conversion } from 'components/partials';
 import { Dialog } from 'components/custom-elements';
 import store from 'store';
-//import 'config/map.config';
 import Logo from 'assets/gfx/logo-dibk.svg';
 import './App.scss';
 
@@ -28,30 +25,30 @@ const App = () => {
                </header>
 
                <div className="row mb-4">
-                  <div className="col-3">
-                     <Form.Control type="text" value={username} required placeholder="Ditt navn..." onChange={event => setUsername(event.target.value)} />
+                  <div className="col-2">
+                     <Form.Control                      
+                        type="text" 
+                        value={username} 
+                        required 
+                        placeholder="Brukernavn" 
+                        onChange={event => setUsername(event.target.value)} 
+                     />
                   </div>
                </div>
 
                <div className="app-container">
-                  <Tabs defaultActiveKey="submit-varsel-planoppstart" id="tabs" transition={false}>
-                     <Tab eventKey="submit-varsel-planoppstart" title="Innsending av varsel om planoppstart">
-                        <SubmitVarselPlanoppstart username={username} />
+                  <Tabs defaultActiveKey="varsel-om-planoppstart" id="tabs" transition={false}>
+                     <Tab eventKey="varsel-om-planoppstart" title="Varsel om planoppstart">
+                        <VarselOmPlanoppstart username={username} />
                      </Tab>
-                     <Tab eventKey="validate-varsel-planoppstart" title="Validering av varsel om planoppstart">
-                        <ValidateVarselPlanoppstart username={username} />
+                     <Tab eventKey="høring-og-offentlig-ettersyn" title="Høring og offentlig ettersyn">
+                        <HøringOgOffentligEttersyn username={username} />
                      </Tab>
-                     <Tab eventKey="validate-plangrense" title="Validering av plangrense">
-                        <ValidatePlangrense username={username} />
+                     <Tab eventKey="reguleringsplanforslag" title="Reguleringsplanforslag">
+                        <Reguleringsplanforslag username={username} />
                      </Tab>
-                     <Tab eventKey="validate-planforslag" title="Validering av reguleringsplanforslag">
-                        <ValidatePlanforslag username={username} />
-                     </Tab>
-                     <Tab eventKey="convert-planbestemmelser" title="Konvertering av planbestemmelser">
-                        <ConvertPlanbestemmelser username={username} />
-                     </Tab>
-                     <Tab eventKey="gml2sosi" title="Konvertering av GML til SOSI">
-                        <Gml2Sosi />
+                     <Tab eventKey="conversion" title="Konvertering">
+                        <Conversion username={username} />                        
                      </Tab>
                   </Tabs>
                </div>

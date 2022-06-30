@@ -7,7 +7,7 @@ import { showDialog } from 'store/slices/dialogSlice';
 import { sendAsync } from 'utils/api';
 import './RuleInfo.scss';
 
-function RuleInfo({ apiUrl, username }) {  
+function RuleInfo({ apiUrl, rulesetName, username }) {  
    const dispatch = useDispatch();
    let ruleInfo = null;
 
@@ -32,7 +32,7 @@ function RuleInfo({ apiUrl, username }) {
       const ruleCount = ruleInfo.reduce((total, group) => total + group.rules.length, 0);
       const body = ReactDOMServer.renderToStaticMarkup(renderDialogBody());
 
-      dispatch(showDialog({ title: `Valideringsregler (${ruleCount})`, body, className: 'rule-summary-dialog' }));
+      dispatch(showDialog({ title: `Valideringsregler - ${rulesetName} (${ruleCount})`, body, className: 'rule-summary-dialog' }));
    }
 
    function renderDialogBody() {

@@ -1,8 +1,7 @@
-export { default as Gml2Sosi } from './Gml2Sosi/Gml2Sosi';
+export { default as Conversion } from './Conversion/Conversion';
+export { default as HøringOgOffentligEttersyn } from './HøringOgOffentligEttersyn/HøringOgOffentligEttersyn';
+export { default as Reguleringsplanforslag } from './Reguleringsplanforslag/Reguleringsplanforslag';
 export { default as RuleInfo } from './RuleInfo/RuleInfo';
-export { default as SubmitVarselPlanoppstart } from './SubmitVarselPlanoppstart/SubmitVarselPlanoppstart';
-export { default as ValidatePlanforslag } from './ValidatePlanforslag/ValidatePlanforslag';
-export { default as ValidateVarselPlanoppstart } from './ValidateVarselPlanoppstart/ValidateVarselPlanoppstart';
-export { default as ValidatePlangrense } from './ValidatePlangrense/ValidatePlangrense';
-export { default as ConvertPlanbestemmelser } from './ConvertPlanbestemmelser/ConvertPlanbestemmelser';
-export { default as ValidationReponse } from './ValidationResponse/ValidationResponse';
+export { default as SubmittalResponse } from './Response/SubmittalResponse/SubmittalResponse';
+export { default as ValidationResponse } from './Response/ValidationResponse/ValidationResponse';
+export { default as VarselOmPlanoppstart } from './VarselOmPlanoppstart/VarselOmPlanoppstart';

@@ -1,0 +1,15 @@
+.select-dataset {
+   display: flex;
+   align-items: center;
+   margin-bottom: 25px;   
+
+   > div {
+      margin-right: 25px;
+   }
+}
+
+.select-dropdown-validate {
+   button {
+      width: 250px;
+   }
+}

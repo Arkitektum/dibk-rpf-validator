@@ -1,27 +1,49 @@
-.jsonPrint {
-   height: 350px;
-   overflow-y: scroll;
-   border: 1px solid rgb(206, 212, 218);
-   overscroll-behavior: contain;
-   margin-bottom: 25px;
-   
-   pre {
-      background-color: #ffffff;
-      padding: 10px 20px;
-      white-space: pre-wrap;
-      margin: 0;
-      font-size: 12px;
+.json-print-container {
+   position: relative;
+
+   .copy-button {
+      background: url('../../../assets/gfx/icon-copy-text.svg') no-repeat center;
+      background-size: 25px !important;
+      width: 25px;
+      height: 25px;
+      border: 0;
+      position: sticky;
+      left: calc(100% - 35px);
+      top: 15px;
+      opacity: .6;
+
+      &.copy-button--text-copied {
+         background: url('../../../assets/gfx/icon-text-copied.svg') no-repeat center;
+         background-size: 22px !important;
+         opacity: 1;
+      }
+
+      &:hover {
+         opacity: 1;
+      }
    }
-   
-   .json-key {
-      color: brown;
-   }
-   
-   .json-value {
-      color: navy;
-   }
-   
-   .json-string {
-      color: olive;
+
+   .json-print {    
+      margin-top: -30px;
+
+      pre {
+         background-color: #ffffff;
+         padding: 10px 20px;
+         white-space: pre-wrap;
+         margin: 0;
+         font-size: 12px;
+      }
+      
+      .json-key {
+         color: brown;
+      }
+      
+      .json-value {
+         color: navy;
+      }
+      
+      .json-string {
+         color: olive;
+      }
    }
 }
