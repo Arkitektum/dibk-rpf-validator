@@ -52,13 +52,13 @@ function SubmitVarselOmPlanoppstart({ username }) {
          <div className="row">
             <div className="col">
                <Form.Group controlId="formUploadVarselbrev">
-                  <Form.Label className="required">Varselbrev (XML)</Form.Label>
+                  <Form.Label className="required">Varselbrev (.xml)</Form.Label>
                   <FileInput name="varselbrev" required accept=".xml" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
             <div className="col">
                <Form.Group controlId="formUploadPlangrenseGml">
-                  <Form.Label>Planområde (GML)</Form.Label>
+                  <Form.Label>Planområde (.gml)</Form.Label>
                   <FileInput name="planomraade" accept=".gml" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
@@ -67,13 +67,13 @@ function SubmitVarselOmPlanoppstart({ username }) {
          <div className="row">
             <div className="col">
                <Form.Group controlId="formUploadPlangrenseSosi">
-                  <Form.Label>Planområde (SOSI)</Form.Label>
+                  <Form.Label>Planområde (.sos, .sosi)</Form.Label>
                   <FileInput name="planomraadeSosi" accept=".sos, .sosi" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
             <div className="col">
                <Form.Group controlId="formUploadPlangrensePdf">
-                  <Form.Label>Planområde (PDF)</Form.Label>
+                  <Form.Label>Planområde (.pdf)</Form.Label>
                   <FileInput name="planomraadePdf" accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
@@ -82,13 +82,13 @@ function SubmitVarselOmPlanoppstart({ username }) {
          <div className="row">
             <div className="col">
                <Form.Group controlId="formUploadKartDetaljert">
-                  <Form.Label>Detaljert kart (PDF)</Form.Label>
+                  <Form.Label>Detaljert kart (.pdf)</Form.Label>
                   <FileInput name="kartDetaljert" accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
             <div className="col">
                <Form.Group controlId="formUploadPlaninitiativ">
-                  <Form.Label>Planinitiativ (PDF)</Form.Label>
+                  <Form.Label>Planinitiativ (.pdf)</Form.Label>
                   <FileInput name="planinitiativ" accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
@@ -97,13 +97,13 @@ function SubmitVarselOmPlanoppstart({ username }) {
          <div className="row">
             <div className="col">
                <Form.Group controlId="formUploadPlanprogram">
-                  <Form.Label>Planprogram (PDF)</Form.Label>
+                  <Form.Label>Planprogram (.pdf)</Form.Label>
                   <FileInput name="planprogram" accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
             <div className="col">
                <Form.Group controlId="formUploadReferatOppstartsmøte">
-                  <Form.Label>Referat fra oppstartsmøte (PDF)</Form.Label>
+                  <Form.Label>Referat fra oppstartsmøte (.pdf)</Form.Label>
                   <FileInput name="referatOppstartsmoete" accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
@@ -112,7 +112,7 @@ function SubmitVarselOmPlanoppstart({ username }) {
          <div className="row">
             <div className="col-6">
                <Form.Group controlId="formUploadAnnet">
-                  <Form.Label>Annet (PDF)</Form.Label>
+                  <Form.Label>Annet (.pdf)</Form.Label>
                   <FileInput name="annet" accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>

@@ -5,8 +5,8 @@ import ValidatePlanområde from './ValidatePlanområde/ValidatePlanområde';
 import './Validate.scss';
 
 const OPTIONS = [
-   { value: 'varsel', label: 'Varselbrev (XML)' },
-   { value: 'planområde', label: 'Planområde (GML)' }
+   { value: 'varsel', label: 'Varselbrev (.xml)' },
+   { value: 'planområde', label: 'Planområde (.gml)' }
 ];
 
 function Validate({ username }) {

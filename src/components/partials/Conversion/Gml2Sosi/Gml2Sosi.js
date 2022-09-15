@@ -48,7 +48,7 @@ function Gml2Sosi() {
          <div className="row">
             <div className="col-6">
                <Form.Group controlId="formGml2Sosi">
-                  <Form.Label>Plankart (GML)</Form.Label>
+                  <Form.Label>Plankart (.gml)</Form.Label>
                   <FileInput name="gmlFile" accept=".gml" fileList={uploadFiles} onChange={setUploadFiles} ref={fileInput} multiple={false} />
                </Form.Group>
             </div>

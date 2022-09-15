@@ -52,59 +52,74 @@ function SumbitHøringOgOffentligEttersyn({ username }) {
          <div className="row">
             <div className="col">
                <Form.Group controlId="formUploadVarselbrev">
-                  <Form.Label className="required">Varselbrev (XML)</Form.Label>
-                  <FileInput name="varselbrev" required accept=".xml" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
+                  <Form.Label className="required">Varselbrev (.xml)</Form.Label>
+                  <FileInput name="Varselbrev" required accept=".xml" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
             <div className="col">
-               <Form.Group controlId="formUploadPlangrenseGml">
-                  <Form.Label>Planområde (GML)</Form.Label>
-                  <FileInput name="planomraade" accept=".gml" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
-               </Form.Group>
-            </div>
-         </div>
-
-         <div className="row">
-            <div className="col">
-               <Form.Group controlId="formUploadPlangrenseSosi">
-                  <Form.Label>Planområde (SOSI)</Form.Label>
-                  <FileInput name="planomraadeSosi" accept=".sos, .sosi" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
-               </Form.Group>
-            </div>
-            <div className="col">
-               <Form.Group controlId="formUploadPlangrensePdf">
-                  <Form.Label>Planområde (PDF)</Form.Label>
-                  <FileInput name="planomraadePdf" accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
+               <Form.Group controlId="formUploadPlankartGml">
+                  <Form.Label>Plankart (.gml)</Form.Label>
+                  <FileInput name="PlankartGml" accept=".gml" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
          </div>
 
          <div className="row">
             <div className="col">
-               <Form.Group controlId="formUploadKartDetaljert">
-                  <Form.Label>Detaljert kart (PDF)</Form.Label>
-                  <FileInput name="kartDetaljert" accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
+               <Form.Group controlId="formUploadPlankartPdf">
+                  <Form.Label className="required">Plankart (.pdf)</Form.Label>
+                  <FileInput name="Plankart" required accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
             <div className="col">
-               <Form.Group controlId="formUploadPlaninitiativ">
-                  <Form.Label>Planinitiativ (PDF)</Form.Label>
-                  <FileInput name="planinitiativ" accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
+               <Form.Group controlId="formUploadPlankartSosi">
+                  <Form.Label>Plankart (.sos, .sosi)</Form.Label>
+                  <FileInput name="PlankartSosi" accept=".sos, .sosi" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
          </div>
 
          <div className="row">
             <div className="col">
-               <Form.Group controlId="formUploadPlanprogram">
-                  <Form.Label>Planprogram (PDF)</Form.Label>
-                  <FileInput name="planprogram" accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
+               <Form.Group controlId="formUploadPlanbestemmelserPdf">
+                  <Form.Label className="required">Planbestemmelser (.pdf)</Form.Label>
+                  <FileInput name="Planbestemmelser" required accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
             <div className="col">
-               <Form.Group controlId="formUploadReferatOppstartsmøte">
-                  <Form.Label>Referat fra oppstartsmøte (PDF)</Form.Label>
-                  <FileInput name="referatOppstartsmoete" accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
+               <Form.Group controlId="formUploadPlanbestemmelserXml">
+                  <Form.Label>Planbestemmelser (.xml)</Form.Label>
+                  <FileInput name="PlanbestemmelserXml" accept=".xml" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
+               </Form.Group>
+            </div>
+         </div>
+
+         <div className="row">
+            <div className="col">
+               <Form.Group controlId="formUploadPlanbeskrivelse">
+                  <Form.Label>Planbeskrivelse (.pdf, .png, .jpg, .jpeg, .tif, .tiff)</Form.Label>
+                  <FileInput name="Planbeskrivelse" accept=".pdf, .png, .jpg, .jpeg, .tif, .tiff" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
+               </Form.Group>
+            </div>
+            <div className="col">
+               <Form.Group controlId="formUploadIllustrasjoner">
+                  <Form.Label>Illustrasjoner (.pdf, .png, .jpg, .jpeg, .tif, .tiff)</Form.Label>
+                  <FileInput name="Illustrasjoner" accept=".pdf, .png, .jpg, .jpeg, .tif, .tiff" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
+               </Form.Group>
+            </div>
+         </div>
+
+         <div className="row">
+            <div className="col">
+               <Form.Group controlId="formUploadROSAnalyse">
+                  <Form.Label>ROS-analyse (.pdf, .png, .jpg, .jpeg, .tif, .tiff)</Form.Label>
+                  <FileInput name="ROSAnalyse" accept=".pdf, .png, .jpg, .jpeg, .tif, .tiff" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
+               </Form.Group>
+            </div>
+            <div className="col">
+               <Form.Group controlId="formUploadKonsekvensutredning">
+                  <Form.Label>Konsekvensutredning (.pdf, .png, .jpg, .jpeg, .tif, .tiff)</Form.Label>
+                  <FileInput name="Konsekvensutredning" accept=".pdf, .png, .jpg, .jpeg, .tif, .tiff" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
          </div>
@@ -112,8 +127,8 @@ function SumbitHøringOgOffentligEttersyn({ username }) {
          <div className="row">
             <div className="col-6">
                <Form.Group controlId="formUploadAnnet">
-                  <Form.Label>Annet (PDF)</Form.Label>
-                  <FileInput name="annet" accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
+                  <Form.Label>Annet (.pdf, .png, .jpg, .jpeg, .tif, .tiff)</Form.Label>
+                  <FileInput name="Annet" accept=".pdf, .png, .jpg, .jpeg, .tif, .tiff" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
          </div>

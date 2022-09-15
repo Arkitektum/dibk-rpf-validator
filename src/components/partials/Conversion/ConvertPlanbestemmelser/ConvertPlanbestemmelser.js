@@ -82,7 +82,7 @@ function ConvertPlanbestemmelser({ username }) {
          <div className="row">
             <div className="col">
                <Form.Group controlId="formUploadPlanbestemmelser">
-                  <Form.Label>Planbestemmelser (XML)</Form.Label>
+                  <Form.Label>Planbestemmelser (.xml)</Form.Label>
                   <FileInput name="file" accept=".xml" fileList={uploadFiles} onChange={setUploadFiles} ref={fileInput} />
                </Form.Group>
             </div>

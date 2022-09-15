@@ -57,13 +57,13 @@ function ValidateReguleringsplanforslag({ username }) {
          <div className="row">
             <div className="col">
                <Form.Group controlId="formUploadOversendelse">
-                  <Form.Label>Oversendelse (XML)</Form.Label>
+                  <Form.Label>Oversendelse (.xml)</Form.Label>
                   <FileInput name="oversendelse" accept=".xml" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
             <div className="col">
                <Form.Group controlId="formUploadPlanbestemmelser">
-                  <Form.Label>Planbestemmelser (XML)</Form.Label>
+                  <Form.Label>Planbestemmelser (.xml)</Form.Label>
                   <FileInput name="planbestemmelser" accept=".xml" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
@@ -72,13 +72,13 @@ function ValidateReguleringsplanforslag({ username }) {
          <div className="row">
             <div className="col">
                <Form.Group controlId="formUploadPlankart2d">
-                  <Form.Label>Plankart 2D (GML)</Form.Label>
+                  <Form.Label>Plankart 2D (.gml)</Form.Label>
                   <FileInput name="plankart2d" accept=".gml" multiple={true} fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
             <div className="col">
                <Form.Group controlId="formUploadPlankart2d">
-                  <Form.Label>Plankart 3D (GML)</Form.Label>
+                  <Form.Label>Plankart 3D (.gml)</Form.Label>
                   <FileInput name="plankart3d" accept=".gml" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
