@@ -7,6 +7,12 @@ import { sendAsync } from 'utils/api';
 
 const SUBMIT_URL = process.env.REACT_APP_HOERING_OFFENTLIG_ETTERSYN_SUBMIT_URL;
 
+const REQUIRED_FILE_TYPES = [
+   'Varselbrev',
+   'Plankart',
+   'Planbestemmelser'
+];
+
 function SumbitHøringOgOffentligEttersyn({ username }) {
    const [uploadFiles, setUploadFiles] = useState([]);
    const [apiResponse, setApiResponse] = useState(null);
@@ -33,7 +39,7 @@ function SumbitHøringOgOffentligEttersyn({ username }) {
    }
 
    function canSubmit() {
-      return username.trim() !== '' && uploadFiles.some(uploadFile => uploadFile.name === 'varselbrev');
+      return username.trim() !== '' && REQUIRED_FILE_TYPES.every(fileType => uploadFiles.some(uploadFile => uploadFile.name === fileType));
    }
 
    function reset() {
