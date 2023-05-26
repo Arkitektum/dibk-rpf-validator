@@ -13,8 +13,8 @@ window.onbeforeunload = () => {
 const oidcConfig = {
    authority: 'https://oidc-ver2.difi.no/idporten-oidc-provider/',
    client_id: '08c2deed-ab80-4926-8952-a36e52fd7400',
-   redirect_uri: 'dibk-rpf-validator.azurewebsites.net',
-   post_logout_redirect_uri: 'dibk-rpf-validator.azurewebsites.net',
+   redirect_uri: 'https://dibk-rpf-validator.azurewebsites.net',
+   post_logout_redirect_uri: 'https://dibk-rpf-validator.azurewebsites.net',
    response_type: 'code',
    scope: 'openid profile',
    acr_values: "Level3",
