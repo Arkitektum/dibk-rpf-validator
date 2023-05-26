@@ -1,14 +1,18 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
-import { Form, Tab, Tabs } from 'react-bootstrap';
+import { Form, Tab, Tabs, Button } from 'react-bootstrap';
 import { VarselOmPlanoppstart, HøringOgOffentligEttersyn, Reguleringsplanforslag, Conversion } from 'components/partials';
 import { Dialog } from 'components/custom-elements';
 import store from 'store';
 import Logo from 'assets/gfx/logo-dibk.svg';
 import './App.scss';
+import { useAuth } from "react-oidc-context"
 
 const App = () => {
    const [username, setUsername] = useState('');
+   const auth = useAuth();
+
+   const idPortenButton = auth.isAuthenticated ? <Button onClick={auth.signoutRedirect }>Logg ut av ID-porten</Button> : <Button onClick={auth.signinRedirect}>ID-porten logg inn</Button>;
 
    return (
       <Provider store={store}>
@@ -26,15 +30,22 @@ const App = () => {
 
                <div className="row mb-4">
                   <div className="col-2">
-                     <Form.Control                      
-                        type="text" 
-                        value={username} 
-                        required 
-                        placeholder="Brukernavn" 
-                        onChange={event => setUsername(event.target.value)} 
+                     <Form.Control
+                        type="text"
+                        value={username}
+                        required
+                        placeholder="Brukernavn"
+                        onChange={event => setUsername(event.target.value)}
                      />
                   </div>
                </div>
+
+               <div className="row mb-4">
+                  <div className="col-1">
+                     {idPortenButton}
+                  </div>
+               </div>
+
 
                <div className="app-container">
                   <Tabs defaultActiveKey="varsel-om-planoppstart" id="tabs" transition={false}>
@@ -48,7 +59,7 @@ const App = () => {
                         <Reguleringsplanforslag username={username} />
                      </Tab>
                      <Tab eventKey="conversion" title="Konvertering">
-                        <Conversion username={username} />                        
+                        <Conversion username={username} />
                      </Tab>
                   </Tabs>
                </div>
