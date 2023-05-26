@@ -11,7 +11,7 @@ function SubmitVarselOmPlanoppstart({ username }) {
    const auth = useAuth();
 
    const [uploadFiles, setUploadFiles] = useState([]);
-   const [apiResponse, setApiResponse] = useState(null);
+   //const [apiResponse, setApiResponse] = useState(null);
    const [organisationNumber, setOrganisationNumber] = useState('');
    const [birthNumber, setBirthNumber] = useState('');
 
@@ -27,11 +27,13 @@ function SubmitVarselOmPlanoppstart({ username }) {
    //const apiLoading = useSelector(state => state.api.loading);
    const fileInputs = [];
 
+/* eslint-disable */
    useEffect(() => {
       if (!auth.isAuthenticated && auth.user?.expired) {
          auth.signinSilent();
       }
    }, [auth.isAuthenticated])
+/* eslint-enable */
 
    function clearInstanceData(){
       setInstanceError("");
@@ -55,7 +57,7 @@ function SubmitVarselOmPlanoppstart({ username }) {
          return;
       }
 
-      setApiResponse(null);
+      //setApiResponse(null);
 
 
       const formData = new FormData();
@@ -149,9 +151,9 @@ function SubmitVarselOmPlanoppstart({ username }) {
             if (res.status === 200 || res.status === 201) {
                setInstanceOwner(instanceResponse.data.instanceOwner);
                setInstanceURL(instanceResponse.data.selfLinks.apps);
-               setApiResponse(res);
+               //setApiResponse(res);
 
-               setApiResponse(res);
+               //setApiResponse(res);
                nextStepOk = true
             }
             else {
@@ -187,7 +189,7 @@ function SubmitVarselOmPlanoppstart({ username }) {
             if (res.status === 200 || res.status === 201) {
                setInstanceURL(response.data.selfLinks.apps);
                setValidationResultResponse(res.data);
-               setApiResponse(res);
+               //setApiResponse(res);
             }
             else {
                return res.text().then(text => { throw new Error(text) })
@@ -260,9 +262,9 @@ function SubmitVarselOmPlanoppstart({ username }) {
       }
    }
 
-   function canSubmit() {
-      return uploadFiles.some(uploadFile => uploadFile.name === 'varselbrev');
-   }
+   // function canSubmit() {
+   //    return uploadFiles.some(uploadFile => uploadFile.name === 'varselbrev');
+   // }
 
    function reset() {
       fileInputs.forEach(fileInput => fileInput.reset());

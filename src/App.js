@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Provider } from 'react-redux';
 import { Form, Tab, Tabs, Button } from 'react-bootstrap';
 import { VarselOmPlanoppstart, HøringOgOffentligEttersyn, Reguleringsplanforslag, Conversion } from 'components/partials';

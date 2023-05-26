@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
 import { AuthProvider } from "react-oidc-context";
-import{WebStorageStateStore, User} from "oidc-client-ts"
+import{WebStorageStateStore} from "oidc-client-ts"
 //import 'ol/ol.css';
 import App from './App';
 
