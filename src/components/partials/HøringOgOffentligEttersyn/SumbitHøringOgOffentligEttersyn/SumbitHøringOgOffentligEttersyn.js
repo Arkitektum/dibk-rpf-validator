@@ -74,7 +74,7 @@ function SumbitHøringOgOffentligEttersyn({ username }) {
             <div className="col">
                <Form.Group controlId="formUploadPlankartPdf">
                   <Form.Label className="required">Plankart (.pdf)</Form.Label>
-                  <FileInput name="Plankart" required accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
+                  <FileInput name="PlankartPdf" required accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
             <div className="col">
@@ -89,7 +89,7 @@ function SumbitHøringOgOffentligEttersyn({ username }) {
             <div className="col">
                <Form.Group controlId="formUploadPlanbestemmelserPdf">
                   <Form.Label className="required">Planbestemmelser (.pdf)</Form.Label>
-                  <FileInput name="Planbestemmelser" required accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
+                  <FileInput name="PlanbestemmelserPdf" required accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
             <div className="col">
