@@ -9,8 +9,8 @@ const SUBMIT_URL = process.env.REACT_APP_HOERING_OFFENTLIG_ETTERSYN_SUBMIT_URL;
 
 const REQUIRED_FILE_TYPES = [
    'Varselbrev',
-   'Plankart',
-   'Planbestemmelser'
+   'PlankartPdf',
+   'PlanbestemmelserPdf'
 ];
 
 function SumbitHøringOgOffentligEttersyn({ username }) {
