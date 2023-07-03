@@ -58,13 +58,13 @@ function SumbitHøringOgOffentligEttersyn({ username }) {
          <div className="row">
             <div className="col">
                <Form.Group controlId="formUploadVarselbrev">
-                  <Form.Label className="required">Varselbrev (.xml)</Form.Label>
+                  <Form.Label className="required">Høringsbrev (.xml)</Form.Label>
                   <FileInput name="Varselbrev" required accept=".xml" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
             <div className="col">
                <Form.Group controlId="formUploadPlankartGml">
-                  <Form.Label>Plankart (.gml)</Form.Label>
+                  <Form.Label>Kart med planavgrensning (.gml)</Form.Label>
                   <FileInput name="PlankartGml" accept=".gml" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
@@ -73,13 +73,13 @@ function SumbitHøringOgOffentligEttersyn({ username }) {
          <div className="row">
             <div className="col">
                <Form.Group controlId="formUploadPlankartPdf">
-                  <Form.Label className="required">Plankart (.pdf)</Form.Label>
+                  <Form.Label className="required">Kart med planavgrensning (.pdf)</Form.Label>
                   <FileInput name="PlankartPdf" required accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
             <div className="col">
                <Form.Group controlId="formUploadPlankartSosi">
-                  <Form.Label>Plankart (.sos, .sosi)</Form.Label>
+                  <Form.Label>Kart med planavgrensning (.sos, .sosi)</Form.Label>
                   <FileInput name="PlankartSosi" accept=".sos, .sosi" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
