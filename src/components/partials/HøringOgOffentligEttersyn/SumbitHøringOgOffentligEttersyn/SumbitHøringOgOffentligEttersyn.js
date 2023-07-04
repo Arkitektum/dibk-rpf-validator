@@ -1,19 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import { Button, Form, Spinner } from 'react-bootstrap';
 import { FileInput } from 'components/custom-elements';
-import { SubmittalResponse } from 'components/partials';
-import { sendAsync } from 'utils/api';
 import { useAuth } from "react-oidc-context";
 import axios from 'axios';
 import ReactJson from 'react-json-view';
 
 //const SUBMIT_URL = process.env.REACT_APP_HOERING_OFFENTLIG_ETTERSYN_SUBMIT_URL;
 
-const REQUIRED_FILE_TYPES = [
-   'Varselbrev',
-   'PlanbestemmelserPdf'
-];
 
 function SumbitHøringOgOffentligEttersyn({ username }) {
    const auth = useAuth();
