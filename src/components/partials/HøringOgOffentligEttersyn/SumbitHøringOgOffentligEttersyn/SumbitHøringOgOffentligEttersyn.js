@@ -64,7 +64,7 @@ function SumbitHøringOgOffentligEttersyn({ username }) {
             </div>
             <div className="col">
                <Form.Group controlId="formUploadPlankartGml">
-                  <Form.Label>Kart med planavgrensning (.gml)</Form.Label>
+                  <Form.Label className="partlyRequired">Kart med planavgrensning (.gml)</Form.Label>
                   <FileInput name="PlankartGml" accept=".gml" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
@@ -73,13 +73,13 @@ function SumbitHøringOgOffentligEttersyn({ username }) {
          <div className="row">
             <div className="col">
                <Form.Group controlId="formUploadPlankartPdf">
-                  <Form.Label className="required">Kart med planavgrensning (.pdf)</Form.Label>
+                  <Form.Label className="partlyRequired">Kart med planavgrensning (.pdf)</Form.Label>
                   <FileInput name="PlankartPdf" required accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
             <div className="col">
                <Form.Group controlId="formUploadPlankartSosi">
-                  <Form.Label>Kart med planavgrensning (.sos, .sosi)</Form.Label>
+                  <Form.Label className="partlyRequired">Kart med planavgrensning (.sos, .sosi)</Form.Label>
                   <FileInput name="PlankartSosi" accept=".sos, .sosi" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
@@ -141,7 +141,12 @@ function SumbitHøringOgOffentligEttersyn({ username }) {
 
          <div className="row mb-3">
             <div className="col">
-               Felter markert med en rød stjerne (<span className="required">*</span>) er obligatoriske
+               <span className="required">*</span> = Feltet er obligatorisk
+            </div>
+         </div>
+         <div className="row mb-3">
+            <div className="col">
+               <span className="required">**</span> = Minst et av feltene må fylles ut
             </div>
          </div>
 

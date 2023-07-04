@@ -61,3 +61,10 @@ label.required::after {
    font-size: 18px;
    line-height: 14px;
 }
+label.partlyRequired::after {
+   content: "**";
+   color: #d9534f;
+   margin-left: 3px;
+   font-size: 18px;
+   line-height: 14px;
+}
