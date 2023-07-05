@@ -362,7 +362,7 @@ function clearInstanceData(){
             </div>
             <div className="col">
                <Form.Group controlId="formUploadKonsekvensutredning">
-                  <Form.Label>Konsekvensutredning (.pdf, .png, .jpg, .jpeg, .tif, .tiff)</Form.Label>
+                  <Form.Label className="xmlContentRequired">Konsekvensutredning (.pdf, .png, .jpg, .jpeg, .tif, .tiff)</Form.Label>
                   <FileInput name="Konsekvensutredning" accept=".pdf, .png, .jpg, .jpeg, .tif, .tiff" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
@@ -385,6 +385,11 @@ function clearInstanceData(){
          <div className="row mb-3">
             <div className="col">
                <span className="required">**</span> = Minst et av feltene må fylles ut
+            </div>
+         </div>
+         <div className="row mb-3">
+            <div className="col">
+               <span className="required">***</span> = Hvis Høringsbrev inneholder verdien 'true' for konsekvensutredning, må vedlegg sendes inn.
             </div>
          </div>
 
