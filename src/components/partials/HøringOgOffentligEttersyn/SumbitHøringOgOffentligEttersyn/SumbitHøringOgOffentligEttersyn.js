@@ -264,6 +264,13 @@ function clearInstanceData(){
       }
    }
 
+   function getClickableInstanceUrl(urlToInstance){
+      const indexOfFirst = urlToInstance.indexOf("instance");
+      var newUrl = urlToInstance.slice(0, indexOfFirst) + "#/" + urlToInstance.slice(indexOfFirst);
+      newUrl = newUrl.replace("instances", "instance");
+      return newUrl;
+   }
+
    return (
       <React.Fragment>
          <div className="row">
@@ -413,7 +420,7 @@ function clearInstanceData(){
             </div>
          </div>
          {instanceOwner !== "" ? <div>{JSON.stringify(instanceOwner)}</div> : <div></div>}
-         {instanceURL !== "" ? <div>{JSON.stringify(instanceURL)}</div> : <div></div>}
+         {instanceURL !== "" ? <div><a href={getClickableInstanceUrl(instanceURL)} target="_blank" rel="noreferrer">Klikk her for å gå til instance. Du må være logget inn i TT02-miljøet.</a></div> : <div></div>}
          {instanceError !== "" ? <div>{JSON.stringify(instanceError)}</div> : <div></div>}
          {validationResultResponse !== "" ? <ReactJson src={validationResultResponse} /> : <div></div>}
          {/* <SubmittalResponse apiResponse={apiResponse} /> */}
