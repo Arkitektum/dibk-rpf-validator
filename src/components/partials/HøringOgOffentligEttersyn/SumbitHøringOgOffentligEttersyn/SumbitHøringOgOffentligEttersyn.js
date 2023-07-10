@@ -60,7 +60,7 @@ function clearInstanceData(){
 
       const formData = new FormData();
       const instance = {
-         "appId": "dibk/varselplanoppstart",
+         "appId": "dibk/varsel-hoffe",
          "instanceOwner": {
             "personNumber": birthNumber,
             "organisationNumber": organisationNumber
