@@ -17,6 +17,7 @@ function SumbitHøringOgOffentligEttersyn({ username }) {
    
    const [instanceOwner, setInstanceOwner] = useState('');
    const [instanceURL, setInstanceURL] = useState('');
+   const [instanceId, setInstanceId] = useState('');
    const [instanceError, setInstanceError] = useState('');
    const [validationResultResponse, setValidationResultResponse] = useState('');
    const [instanceLoading, setInstanceLoading] = useState(false);
@@ -37,6 +38,7 @@ function clearInstanceData(){
    setInstanceError("");
    setInstanceURL("");
    setInstanceOwner("");
+   setInstanceId('');
    setValidationResultResponse("");
 }
 
@@ -50,6 +52,7 @@ function clearInstanceData(){
          setInstanceError({ errorMessage: "Problemer med Altinn Exchange av ID-porten-token." });
          setInstanceURL("");
          setInstanceOwner("");
+         setInstanceId("");
          reset();
          setInstanceLoading(false);
          return;
@@ -101,6 +104,7 @@ function clearInstanceData(){
             setInstanceError(err.response.data);
             setInstanceURL("");
             setInstanceOwner("");
+            setInstanceId("");
          })
       // try {
       //    response = await axios(Object.assign(defaultOptions));
@@ -144,6 +148,7 @@ function clearInstanceData(){
          .then(res => {
             if (res.status === 200 || res.status === 201) {
                setInstanceOwner(instanceResponse.data.instanceOwner);
+               setInstanceId(instanceResponse.data.id);
                setInstanceURL(instanceResponse.data.selfLinks.apps);
                //setApiResponse(res);
 
@@ -158,6 +163,7 @@ function clearInstanceData(){
             setInstanceError(err.response.data);
             setInstanceURL("");
             setInstanceOwner("");
+            setInstanceId("");
          })
       if (!nextStepOk) {
          await callValidateEndpoint(instanceResponse);
@@ -193,6 +199,7 @@ function clearInstanceData(){
             setInstanceError(err.response.data);
             setInstanceURL("");
             setInstanceOwner("");
+            setInstanceId("");
          })
 
    }
@@ -269,6 +276,10 @@ function clearInstanceData(){
       var newUrl = urlToInstance.slice(0, indexOfFirst) + "#/" + urlToInstance.slice(indexOfFirst);
       newUrl = newUrl.replace("instances", "instance");
       return newUrl;
+   }
+
+   function getHovedInnsendingsNummer(id){
+      return id.replace("/", "-");
    }
 
    return (
@@ -420,6 +431,7 @@ function clearInstanceData(){
             </div>
          </div>
          {instanceOwner !== "" ? <div>{JSON.stringify(instanceOwner)}</div> : <div></div>}
+         {instanceOwner !== "" ? <div>Hovedinnsendingsnummer: {getHovedInnsendingsNummer(instanceId)}</div> : <div></div>}
          {instanceURL !== "" ? <div><a href={getClickableInstanceUrl(instanceURL)} target="_blank" rel="noreferrer">Klikk her for å gå til instance. Du må være logget inn i TT02-miljøet.</a></div> : <div></div>}
          {instanceError !== "" ? <div>{JSON.stringify(instanceError)}</div> : <div></div>}
          {validationResultResponse !== "" ? <ReactJson src={validationResultResponse} /> : <div></div>}
