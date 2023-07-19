@@ -320,7 +320,7 @@ function clearInstanceData(){
             </div>
             <div className="col">
                <Form.Group controlId="formUploadPlankartGml">
-                  <Form.Label className="partlyRequired">Kart med planavgrensning (.gml)</Form.Label>
+                  <Form.Label className="partlyRequired">Plankart (.gml)</Form.Label>
                   <FileInput name="PlankartGml" accept=".gml" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
@@ -329,13 +329,13 @@ function clearInstanceData(){
          <div className="row">
             <div className="col">
                <Form.Group controlId="formUploadPlankartPdf">
-                  <Form.Label className="partlyRequired">Kart med planavgrensning (.pdf)</Form.Label>
+                  <Form.Label className="partlyRequired">Plankart (.pdf)</Form.Label>
                   <FileInput name="PlankartPdf" required accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
             <div className="col">
                <Form.Group controlId="formUploadPlankartSosi">
-                  <Form.Label className="partlyRequired">Kart med planavgrensning (.sos, .sosi)</Form.Label>
+                  <Form.Label className="partlyRequired">Plankart (.sos, .sosi)</Form.Label>
                   <FileInput name="PlankartSosi" accept=".sos, .sosi" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
