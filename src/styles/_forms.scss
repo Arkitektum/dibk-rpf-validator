@@ -68,8 +68,15 @@ label.partlyRequired::after {
    font-size: 18px;
    line-height: 14px;
 }
-label.xmlContentRequired::after {
+label.planbestemmelseRequired::after {
    content: "***";
+   color: #d9534f;
+   margin-left: 3px;
+   font-size: 18px;
+   line-height: 14px;
+}
+label.konsekvensRequired::after {
+   content: "****";
    color: #d9534f;
    margin-left: 3px;
    font-size: 18px;

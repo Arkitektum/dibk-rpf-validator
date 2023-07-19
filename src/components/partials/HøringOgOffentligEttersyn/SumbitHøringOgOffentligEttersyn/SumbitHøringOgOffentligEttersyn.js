@@ -344,13 +344,13 @@ function clearInstanceData(){
          <div className="row">
             <div className="col">
                <Form.Group controlId="formUploadPlanbestemmelserPdf">
-                  <Form.Label className="required">Planbestemmelser (.pdf)</Form.Label>
+                  <Form.Label className="planbestemmelseRequired">Planbestemmelser (.pdf)</Form.Label>
                   <FileInput name="PlanbestemmelserPdf" required accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
             <div className="col">
                <Form.Group controlId="formUploadPlanbestemmelserXml">
-                  <Form.Label>Planbestemmelser (.xml)</Form.Label>
+                  <Form.Label className="planbestemmelseRequired">Planbestemmelser (.xml)</Form.Label>
                   <FileInput name="PlanbestemmelserXml" accept=".xml" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
@@ -380,7 +380,7 @@ function clearInstanceData(){
             </div>
             <div className="col">
                <Form.Group controlId="formUploadKonsekvensutredning">
-                  <Form.Label className="xmlContentRequired">Konsekvensutredning (.pdf, .png, .jpg, .jpeg, .tif, .tiff)</Form.Label>
+                  <Form.Label className="konsekvensRequired">Konsekvensutredning (.pdf, .png, .jpg, .jpeg, .tif, .tiff)</Form.Label>
                   <FileInput name="Konsekvensutredning" accept=".pdf, .png, .jpg, .jpeg, .tif, .tiff" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
@@ -402,12 +402,17 @@ function clearInstanceData(){
          </div>
          <div className="row mb-3">
             <div className="col">
-               <span className="required">**</span> = Minst et av feltene må fylles ut
+               <span className="required">**</span> = Plankart må sendes inn minst i et av formatene: .gml, .pdf, sos eller .sosi
             </div>
          </div>
          <div className="row mb-3">
             <div className="col">
-               <span className="required">***</span> = Hvis Høringsbrev inneholder verdien 'true' for konsekvensutredning, må vedlegg sendes inn.
+               <span className="required">***</span> = Planbestemmelser må sendes inn i et av formatene: .pdf eller .xml
+            </div>
+         </div>
+         <div className="row mb-3">
+            <div className="col">
+               <span className="required">****</span> = Hvis Høringsbrev inneholder verdien 'true' for konsekvensutredning, må vedlegg sendes inn.
             </div>
          </div>
 
