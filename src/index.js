@@ -11,13 +11,13 @@ window.onbeforeunload = () => {
 };
 
 const oidcConfig = {
-   authority: 'https://oidc-ver2.difi.no/idporten-oidc-provider/',
+   authority: 'https://test.idporten.no',
    client_id: 'e8036c98-a703-4cbd-8028-3434cf23a4fe',
    redirect_uri: 'https://dibk-rpf-validator.azurewebsites.net',
    post_logout_redirect_uri: 'https://dibk-rpf-validator.azurewebsites.net',
    response_type: 'code',
    scope: 'openid profile',
-   acr_values: "Level3",
+   acr_values: "idporten-loa-substantial",
    ui_locales: "nb",
    automaticSilentRenew: true,
    userStore: new WebStorageStateStore({
