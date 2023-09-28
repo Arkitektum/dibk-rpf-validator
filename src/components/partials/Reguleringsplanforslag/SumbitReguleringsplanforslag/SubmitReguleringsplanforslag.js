@@ -80,8 +80,8 @@ function clearInstanceData(){
             var newFileOmraade = new File([uploadFile.file], uploadFile.file.name, { type: "application/gml+xml" })
             formData.append(uploadFile.name, newFileOmraade)
          } else if (uploadFile.name === "plankartGml3d") {
-            var newFileOmraade = new File([uploadFile.file], uploadFile.file.name, { type: "application/gml+xml" })
-            formData.append(uploadFile.name, newFileOmraade)
+            var newFileOmraade3D = new File([uploadFile.file], uploadFile.file.name, { type: "application/gml+xml" })
+            formData.append(uploadFile.name, newFileOmraade3D)
          } else {
             formData.append(uploadFile.name, uploadFile.file)
          }
