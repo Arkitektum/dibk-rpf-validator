@@ -356,14 +356,14 @@ function clearInstanceData(){
          <div className="row">
             <div className="col">
                <Form.Group controlId="formUploadPlankartPdf">
-                  <Form.Label className="partlyRequired">Plankart (.pdf)</Form.Label>
+                  <Form.Label>Plankart (.pdf)</Form.Label>
                   <FileInput name="plankartPDF" required accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
             <div className="col">
-               <Form.Group controlId="formUploadPlankartSosi">
-                  <Form.Label className="partlyRequired">Plankart (.sos, .sosi)</Form.Label>
-                  <FileInput name="plankartSosi" accept=".sos, .sosi" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
+               <Form.Group controlId="formUploadAnnet">
+                  <Form.Label>Annet (.pdf, .png, .jpg, .jpeg, .tif, .tiff)</Form.Label>
+                  <FileInput name="annet" accept=".pdf, .png, .jpg, .jpeg, .tif, .tiff" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
          </div>
@@ -376,7 +376,7 @@ function clearInstanceData(){
             </div>
             <div className="col">
                <Form.Group controlId="formUploadVarslingsliste">
-                  <Form.Label>Varslingsliste (.pdf)</Form.Label>
+                  <Form.Label className="required">Varslingsliste (.pdf)</Form.Label>
                   <FileInput name="varslingsliste" required accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
@@ -385,7 +385,7 @@ function clearInstanceData(){
             <div className="col">
                <Form.Group controlId="formUploadSamlefilMottatteUttalelser">
                   <Form.Label>Samlefil av mottatte uttalelser (.pdf)</Form.Label>
-                  <FileInput name="samlefilMottatteUttalelser" required accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
+                  <FileInput name="samlefilUttalelser" required accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
             <div className="col">
@@ -425,57 +425,15 @@ function clearInstanceData(){
          </div>
          <div className="row">
             <div className="col">
-               <Form.Group controlId="formUploadGrunnforholdGeoteknikk">
-                  <Form.Label>Grunnforhold geoteknikk (.pdf, .png, .jpg, .jpeg, .tif, .tiff)</Form.Label>
-                  <FileInput name="grunnforholdGeoteknikk" accept=".pdf, .png, .jpg, .jpeg, .tif, .tiff" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
+               <Form.Group controlId="formUploadUtredning">
+                  <Form.Label>Utredning (.pdf, .png, .jpg, .jpeg, .tif, .tiff)</Form.Label>
+                  <FileInput name="utredning" accept=".pdf, .png, .jpg, .jpeg, .tif, .tiff" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
             <div className="col">
-               <Form.Group controlId="formUploadGrunnforholdForurensetGrunn">
-                  <Form.Label>Grunnforhold forurenset grunn (.pdf, .png, .jpg, .jpeg, .tif, .tiff)</Form.Label>
-                  <FileInput name="grunnforholdForurensetGrunn" accept=".pdf, .png, .jpg, .jpeg, .tif, .tiff" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
-               </Form.Group>
-            </div>
-         </div>
-         <div className="row">
-            <div className="col">
-               <Form.Group controlId="formUploadTrafikkutredning">
-                  <Form.Label>Trafikkutredning (.pdf, .png, .jpg, .jpeg, .tif, .tiff)</Form.Label>
-                  <FileInput name="trafikkutredning" accept=".pdf, .png, .jpg, .jpeg, .tif, .tiff" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
-               </Form.Group>
-            </div>
-            <div className="col">
-               <Form.Group controlId="formUploadStøyutredning">
-                  <Form.Label>Støyutredning (.pdf, .png, .jpg, .jpeg, .tif, .tiff)</Form.Label>
-                  <FileInput name="stoyutredning" accept=".pdf, .png, .jpg, .jpeg, .tif, .tiff" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
-               </Form.Group>
-            </div>
-         </div>
-         <div className="row">
-            <div className="col">
-               <Form.Group controlId="formUploadArkeologiskeUndersøkelser">
-                  <Form.Label>Arkeologiske undersøkelser (.pdf, .png, .jpg, .jpeg, .tif, .tiff)</Form.Label>
-                  <FileInput name="arkeologiskeUndersokelser" accept=".pdf, .png, .jpg, .jpeg, .tif, .tiff" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
-               </Form.Group>
-            </div>
-            <div className="col">
-               <Form.Group controlId="formUploadRammeplanVannAvløpOvervann">
-                  <Form.Label>Rammeplan vann, avløp og overvann (.pdf, .png, .jpg, .jpeg, .tif, .tiff)</Form.Label>
-                  <FileInput name="rammeplanVannAvlopOvervann" accept=".pdf, .png, .jpg, .jpeg, .tif, .tiff" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
-               </Form.Group>
-            </div>
-         </div>
-         <div className="row">
-            <div className="col">
-               <Form.Group controlId="formUploadBiologiskMangfold">
-                  <Form.Label>Biologisk mangfold (.pdf, .png, .jpg, .jpeg, .tif, .tiff)</Form.Label>
-                  <FileInput name="biologiskMangfold" accept=".pdf, .png, .jpg, .jpeg, .tif, .tiff" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
-               </Form.Group>
-            </div>
-            <div className="col">
-               <Form.Group controlId="formUploadAnnet">
-                  <Form.Label>Annet (.pdf, .png, .jpg, .jpeg, .tif, .tiff)</Form.Label>
-                  <FileInput name="annet" accept=".pdf, .png, .jpg, .jpeg, .tif, .tiff" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
+               <Form.Group controlId="formUploadRapport">
+                  <Form.Label>Rapport (.pdf, .png, .jpg, .jpeg, .tif, .tiff)</Form.Label>
+                  <FileInput name="rapport" accept=".pdf, .png, .jpg, .jpeg, .tif, .tiff" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
          </div>
@@ -483,16 +441,6 @@ function clearInstanceData(){
          <div className="row mb-3">
             <div className="col">
                <span className="required">*</span> = Feltet er obligatorisk
-            </div>
-         </div>
-         <div className="row mb-3">
-            <div className="col">
-               <span className="required">**</span> = Plankart må sendes inn minst i et av formatene: .gml, .pdf, sos eller .sosi
-            </div>
-         </div>
-         <div className="row mb-3">
-            <div className="col">
-               <span className="required">****</span> = Hvis oversendelsesbrev inneholder verdien 'true' for konsekvensutredning, må vedlegg sendes inn.
             </div>
          </div>
 
