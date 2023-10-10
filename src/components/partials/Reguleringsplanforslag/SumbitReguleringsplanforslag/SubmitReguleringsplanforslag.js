@@ -391,7 +391,7 @@ function clearInstanceData(){
             <div className="col">
                <Form.Group controlId="formUploadKommentarTilUttalelser">
                   <Form.Label>Kommentar til uttalelser (.pdf)</Form.Label>
-                  <FileInput name="kommentarTilUttalelser" required accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
+                  <FileInput name="kommentarerUttalelser" required accept=".pdf" fileList={uploadFiles} onChange={setUploadFiles} ref={setFileInputRef} />
                </Form.Group>
             </div>
          </div>
